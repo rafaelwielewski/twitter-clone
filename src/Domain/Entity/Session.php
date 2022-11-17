@@ -5,33 +5,24 @@ use App\Infra\Repository\LoginRepositoryMySQL;
 
 class Session {
     
-    public function __construct(LoginRepositoryMySQL $session)
+    public function __construct(LoginRepositoryMySQL $results)
     {
-        Var_dump($session);
+        $_SESSION['loggedin'] = TRUE;
+        $_SESSION['name'] = $results["desname"];
+		$_SESSION['username'] = $results["deslogin"];
+		$_SESSION['password'] = $results["despassword"];
+        var_dump($_SESSION);
     }
 
-   /* public function getPassword(): string
-    {
-        return $this->password;
-    }
 
-   
-    public function setLoginUsername(Username $username)
+    public function setSessionPassword(LoginRepositoryMySQL $results)
     {
-        $this->usernameLogin = $username;
-    }
-    public function getLoginUsername()
-    {
-        return $this->usernameLogin->getUsername();
-    }
-    public function setSessionPassword(LoginRepositoryMySQL $login)
-    {
-        $this->sessionLogin = $login;
-        var_dump($sessionLogin);
+        $this->$_SESSION['password'] = $results["despassword"];
+        
     }
     public function getLoginPassword(): string
     {
         return $this->passwordLogin->getPassword();
-    }*/
+    }
     
 }

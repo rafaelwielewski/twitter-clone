@@ -19,7 +19,7 @@ class PostTweet {
         $tweet = new Tweet();
         $tweet->setText($input->text);
         $tweet->setDate(new DateTime());
-        $tweet->setUserTweet(new UserTweet(
+        $tweet->setUserTweet(new UserTweet(//colocar vindo da seçção
             new Name($input->NameUser),
             new Username($input->UsernameUser)
         ));

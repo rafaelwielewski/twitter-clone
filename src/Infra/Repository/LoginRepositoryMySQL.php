@@ -30,9 +30,9 @@ class LoginRepositoryMySQL implements LoginRepositoryContract {
             $_SESSION['name'] = $results["desname"];
 		    $_SESSION['username'] = $results["deslogin"];
 		    $_SESSION['password'] = $results["despassword"];
-            var_dump($_SESSION);
+            //var_dump($_SESSION);
 	    } else {
-            throw new DomainException('Your password is incorrect');
+            throw new DomainException('Your username or password is incorrect');
         }
 
     }

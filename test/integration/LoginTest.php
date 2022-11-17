@@ -27,6 +27,7 @@ class LoginTest extends TestCase {
         $input->passwordLogin = 'Rafa12345';
 
         $this->assertEmpty($login->execute($input));
+        fwrite(STDERR, print_r($_SESSION, true));
     }
 
 }
