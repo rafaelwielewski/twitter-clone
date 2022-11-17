@@ -19,7 +19,7 @@ class LoginController implements Controller {
         $input = new LoginInput();
         $input->usernameLogin = $httpRequest->body['username'];
         $input->passwordLogin = $httpRequest->body['password'];
-
+        
         $output = $this->loginUsecase->execute($input);
         return new HttpResponse(HttpResponse::HTTP_SUCCESS_CODE, $output);
     }
