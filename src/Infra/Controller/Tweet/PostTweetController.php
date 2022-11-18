@@ -18,7 +18,6 @@ class PostTweetController implements Controller {
     {
         $input = new PostTweetInput();
         $input->text = $httpRequest->body['text'];
-        $input->username = $httpRequest->body['username'];//tirar e colocar vindo da seçção en posttweet.php
 
         $output = $this->postTweetUsecase->execute($input);
         return new HttpResponse(HttpResponse::HTTP_SUCCESS_CODE, $output);

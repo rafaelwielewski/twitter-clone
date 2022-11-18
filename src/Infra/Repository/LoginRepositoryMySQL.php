@@ -27,6 +27,7 @@ class LoginRepositoryMySQL implements LoginRepositoryContract {
             session_start();//tirar
             session_regenerate_id();
 		    $_SESSION['loggedin'] = TRUE;
+            $_SESSION['iduser'] = $results["iduser"];
             $_SESSION['name'] = $results["desname"];
 		    $_SESSION['username'] = $results["deslogin"];
 		    $_SESSION['password'] = $results["despassword"];
