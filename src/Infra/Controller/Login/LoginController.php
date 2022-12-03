@@ -16,10 +16,13 @@ class LoginController implements Controller {
 
     public function handle(HttpRequest $httpRequest): HttpResponse
     {
+
         $input = new LoginInput();
-        $input->usernameLogin = $httpRequest->body['username'];
-        $input->passwordLogin = $httpRequest->body['password'];
-        
+        $post = json_decode(file_get_contents('php://input'), true);
+
+        $input->usernameLogin = $post['username'];
+        $input->passwordLogin = $post['password'];
+
         $output = $this->loginUsecase->execute($input);
         return new HttpResponse(HttpResponse::HTTP_SUCCESS_CODE, $output);
     }

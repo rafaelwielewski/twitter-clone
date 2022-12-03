@@ -7,6 +7,7 @@ use DomainException;
 class Tweet {
     
     private string $text;
+    private string $tweetId;
     private DateTime $date;
     private UserTweet $userTweet;
 
@@ -45,5 +46,12 @@ class Tweet {
     {
         return $this->userTweet->getTweetUsernameUser();
     }
+	public function getTweetId(): string {
+		return $this->tweetId;
+	}
 
+	public function setTweetId(string $tweetId): self {
+		$this->tweetId = $tweetId;
+		return $this;
+	}
 }

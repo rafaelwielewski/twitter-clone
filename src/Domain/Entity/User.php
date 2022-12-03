@@ -2,29 +2,41 @@
 namespace App\Domain\Entity;
 
 use App\Domain\Entity\ValueObject\Name;
+use App\Domain\Entity\ValueObject\Password;
+use App\Domain\Entity\ValueObject\Username;
 
 class User {
 
-    private Name $name;
+    private Name $userName;
+    private Username $userUsername;
+    private Password $userPassword;
+
+    public function __construct()
+    {}
+
+    public function setUserName(Name $name)
+    {
+        $this->userName = $name;
+    }
+    public function getUserName(): string
+    {
+        return $this->userName->getName();
+    }
+    public function setUserUsername(Username $username)
+    {
+        $this->userUsername = $username;
+    }
+    public function getUserUsername(): string
+    {
+        return $this->userUsername->getUsername();
+    }
+    public function setUserPassword(Password $password)
+    {
+        $this->userPassword = $password;
+    }
+    public function getUserPassword(): string
+    {
+        return $this->userPassword->getPassword();
+    }
     
-    public function setName(Name $name)
-    {
-        $this->name = $name;
-    } 
-
-    public function getName(): string
-    {
-        return $this->name->getName();
-    }
-
-    public function getFirstName(): string
-    {
-        return $this->name->getFirstName();
-    }
-
-    public function getLastName(): string
-    {
-        return $this->name->getLastName();
-    }
-
 }
