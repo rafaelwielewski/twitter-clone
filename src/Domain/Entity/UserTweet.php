@@ -8,7 +8,8 @@ class UserTweet {
     
     public function __construct(
     private Name $NameUser,
-    private Username $UsernameUser
+    private Username $UsernameUser,
+    private Iduser $iduserUser
     )
     {}
 

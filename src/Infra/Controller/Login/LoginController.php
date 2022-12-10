@@ -3,6 +3,7 @@
 namespace App\Infra\Controller\Login;
 
 use App\Application\UseCase\Login\LoginInput;
+use App\Application\UseCase\Login\LoginOutput;
 use App\Infra\Controller\Controller;
 use App\Infra\Controller\HttpRequest;
 use App\Infra\Controller\HttpResponse;
@@ -18,13 +19,13 @@ class LoginController implements Controller {
     {
 
         $input = new LoginInput();
-        $post = json_decode(file_get_contents('php://input'), true);
-
-        $input->usernameLogin = $post['username'];
-        $input->passwordLogin = $post['password'];
-
+        $input->usernameLogin = $httpRequest->body['username'];
+        $input->passwordLogin = $httpRequest->body['password'];
+        
         $output = $this->loginUsecase->execute($input);
+
         return new HttpResponse(HttpResponse::HTTP_SUCCESS_CODE, $output);
+
     }
 
 }

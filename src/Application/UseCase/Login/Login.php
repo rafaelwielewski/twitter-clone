@@ -9,7 +9,7 @@ use App\Domain\Entity\ValueObject\Password;
 use App\Domain\Entity\ValueObject\Username;
 
 class Login {
-
+     
     public function __construct(private LoginRepositoryContract $loginRepositoryContract)
     {}
 
@@ -19,7 +19,10 @@ class Login {
         $login->setloginUsername(new Username($input->usernameLogin));
         $login->setloginPassword(new Password($input->passwordLogin));
 
-        $this->loginRepositoryContract->save($login);
+        $output = $this->loginRepositoryContract->save($login);
+        return $output;
+
+
     }
 
 }

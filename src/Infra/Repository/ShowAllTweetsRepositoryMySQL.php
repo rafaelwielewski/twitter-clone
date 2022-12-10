@@ -12,18 +12,12 @@ class ShowAllTweetsRepositoryMySQL implements ShowAllTweetsRepositoryContract {
 
     public function showAllTweets()
     {
-        $sql = 'SELECT * FROM tb_tweets';
+        $sql = 'SELECT a.*, b.profileImg FROM `tb_tweets` a INNER JOIN  `tb_users` b ON a.iduser = b.iduser';
         $results = $this->db->findAll($sql, []);
-        var_dump($results);
 
-        /*$ShowAllTweets['name'] = $results["desname"];
-        $ShowAllTweets['username'] = $results["deslogin"];
-        $ShowAllTweets['tweet'] = $results["destweet"];
-        $ShowAllTweets['date'] = $results["dtresgister"];
-        $ShowAllTweets['replies'] = $results["desreplies"];
-        $ShowAllTweets['likes'] = $results["deslikes"];
-        $ShowAllTweets['idtweet'] = $results["idtweet"];*/
-        
-        return $this->ShowAllTweets = $results;
+
+
+        return $results;
+
     }
 }

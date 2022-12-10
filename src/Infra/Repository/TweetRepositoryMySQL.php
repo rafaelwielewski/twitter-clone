@@ -15,13 +15,12 @@ class TweetRepositoryMySQL implements TweetRepositoryContract {
     {
 
         session_start();//tirar
-        var_dump($_SESSION);
         $sql = 'INSERT INTO tb_tweets (destweet, iduser, desname, deslogin, dtregister) VALUES (:text, :iduser, :name, :username, :date)';
         $this->db->execute($sql, [
-            'text' => $tweet->getText(),
-            'iduser' => $_SESSION['iduser'],
-            'name' => $_SESSION['name'],
-            'username' => $_SESSION['username'],
+            'text' => $tweet->getTweetText(),
+            'iduser' => $tweet->getTweetIduser(),
+            'name' => $tweet->getTweetName(),
+            'username' => $tweet->getTweetUsername(),
             'date' => $tweet->getDate()
         ]);
     }

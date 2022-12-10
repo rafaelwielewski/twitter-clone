@@ -4,6 +4,7 @@ namespace App\Application\UseCase\Like;
 
 use App\Domain\Contract\LikeTweetRepositoryContract;
 use App\Domain\Entity\Tweet;
+use App\Domain\Entity\ValueObject\Iduser;
 
 Class LikeTweet {
 
@@ -15,7 +16,8 @@ Class LikeTweet {
         
         $like = new Tweet();
         $like->setTweetId($input->tweetId);
-        $this->likeRepositoryContract->likeTweet($like);
+        $like->setTweetIduser(new Iduser($input->userid));
+        return $this->likeRepositoryContract->likeTweet($like);
 
     }
 }

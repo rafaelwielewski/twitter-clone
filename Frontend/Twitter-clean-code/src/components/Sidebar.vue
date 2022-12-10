@@ -17,14 +17,15 @@
         <i class="fas fa-plus lg:hidden"></i>
       </button>
     </div>
-    <div class="lg:w-full relative">
+  </div>
+  <div class="lg:w-full relative">
       <button @click="dropdown = !dropdown"
         class="flex items-center w-full hover:bg-lightblue rounded-full p-2 focus:outline-none">
-        <img src="https://randomuser.me/api/portraits/men/11.jpg"
+        <img :src="profileImg"
           class="w-10 h-10 rounded-full border border-lighter" />
         <div class="hidden lg:block ml-4">
-          <p class="text-sm font-bold leading-tight"> Kriss Kawa </p>
-          <p class="text-sm leading-tight"> @kriss </p>
+          <p class="text-sm font-bold leading-tight"> {{ name }}</p>
+          <p class="text-sm leading-tight"> @{{ username }} </p>
         </div>
         <i class="hidden lg:block fas fa-angle-down ml-auto text-lg"></i>
       </button>
@@ -33,11 +34,11 @@
         class="absolute bottom-0 left-0 w-64 rounded-lg shadow-md border-lightest bg-white mb-16">
         <button @click="dropdown = false"
           class="p-3 flex items-center w-full hover:bg-lightest p-2 focus:outline-none">
-          <img src="https://randomuser.me/api/portraits/men/11.jpg"
+          <img :src="profileImg"
             class="w-10 h-10 rounded-full border border-lighter" />
           <div class="ml-4">
-            <p class="text-sm font-bold leading-tight"> Kriss Kawa </p>
-            <p class="text-sm leading-tight"> @kriss </p>
+            <p class="text-sm font-bold leading-tight"> {{ name }} </p>
+            <p class="text-sm leading-tight"> @{{ username }} </p>
           </div>
           <i class="fas fa-check ml-auto test-blue"></i>
         </button>
@@ -45,24 +46,31 @@
           class="w-full text-left hover:bg-lightest border-t border-lighter p-3 test-sm focus:outline-none">
           Add an existing account
         </button>
-        <button @click="dropdown = false"
+        <button @click="logout()"
           class="w-full text-left hover:bg-lightest border-t border-lighter p-3 test-sm focus:outline-none">
-          Log out @kriss
+          Log out
         </button>
       </div>
     </div>
-  </div>
-
 </template>
 
 <script>
+
+import http from '@/services/http';
+import {useRouter} from 'vue-router';
+
 export default {
 name: 'sidebar',
 components: {
 },
+
 data() {
   
   return {
+    profileImg: sessionStorage.getItem("profileImg"),
+    iduser: sessionStorage.getItem("iduser"),
+    name: sessionStorage.getItem("name"),
+    username: sessionStorage.getItem("username"),
     dropdown: false,
     tabs: [
       {icon: 'fas fa-home', title: 'Home', id:'home'},
@@ -75,10 +83,20 @@ data() {
       {icon: 'fas fa-ellipsis-h', title: 'More', id: 'more'}
     ],
   }
+},
+
+
+methods: {
+  logout()
+	{
+    
+    sessionStorage.clear();
+    
+    this.$router.push({path: '/'});
+
+	},
+},
 }
-}
-import http from '@/services/http';
-import {useRouter} from 'vue-router';
 
 
 </script>

@@ -3,6 +3,7 @@
 namespace App\Infra\Controller\Register;
 
 use App\Application\UseCase\Register\RegisterInput;
+use App\Application\UseCase\Register\RegisterOutput;
 use App\Infra\Controller\Controller;
 use App\Infra\Controller\HttpRequest;
 use App\Infra\Controller\HttpResponse;
@@ -21,7 +22,10 @@ class RegisterController implements Controller {
         $input->usernameRegister = $httpRequest->body['username'];
         $input->passwordRegister = $httpRequest->body['password'];
 
+
         $output = $this->registerUsecase->execute($input);
+        $output = "Registered";
+
         return new HttpResponse(HttpResponse::HTTP_SUCCESS_CODE, $output);
     }
 

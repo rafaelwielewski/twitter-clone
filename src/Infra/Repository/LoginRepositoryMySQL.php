@@ -19,22 +19,22 @@ class LoginRepositoryMySQL implements LoginRepositoryContract {
         ]);
         
 
-        if (!$results) throw new DomainException('Your username or password is incorrect');
+        if (!$results) return ('Your username or password is incorrect');
 
         if (password_verify($login->getLoginPassword(), $results["despassword"]) === true)
 		
         {
             session_start();//tirar
             session_regenerate_id();
-		    $_SESSION['loggedin'] = TRUE;
-            $_SESSION['iduser'] = $results["iduser"];
-            $_SESSION['name'] = $results["desname"];
-		    $_SESSION['username'] = $results["deslogin"];
-		    $_SESSION['password'] = $results["despassword"];
+		    $session['loggedin'] = TRUE;
+            $session['iduser'] = $results["iduser"];
+            $session['name'] = $results["desname"];
+		    $session['username'] = $results["deslogin"];
+		    $session['password'] = $results["despassword"];
+            return ($session);
 
-            echo json_encode('loggedIn');
 	    } else {
-            throw new DomainException('Your username or password is incorrect');
+            return ('Your username or password is incorrect');
         }
 
     }

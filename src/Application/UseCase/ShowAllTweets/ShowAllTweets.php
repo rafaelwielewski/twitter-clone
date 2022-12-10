@@ -12,7 +12,8 @@ class ShowAllTweets {
     public function execute() 
     {
         
-        $this->ShowAllTweetsRepositoryContract->showAllTweets();
+        return $this->ShowAllTweetsRepositoryContract->showAllTweets();
+
     }
 
 }

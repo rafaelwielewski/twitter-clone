@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import VueSession from "vue-session";
+import axios from 'axios'
 
 //import './assets/main.css'
 import './assets/style.css'
@@ -15,3 +17,9 @@ const app = createApp(App)
 app.use(router)
 
 app.mount('#app')
+
+Vue.use(VueSession);
+Vue.config.productionTip = false;
+new Vue({
+  render: (h) => h(App)
+}).$mount("#app");

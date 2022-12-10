@@ -5,6 +5,7 @@ namespace App\Infra\Controller\ShowAllTweets;
 use App\Infra\Controller\Controller;
 use App\Infra\Controller\HttpRequest;
 use App\Infra\Controller\HttpResponse;
+use App\Infra\Repository\ShowAllTweetsRepositoryMySQL;
 
 class ShowAllTweetsController implements Controller {
 

@@ -15,11 +15,45 @@
 </template>
 
 <script setup>
+
 import sidebar from '@/components/Sidebar.vue';
 import trending from '@/components/trending.vue';
 import tweets from '@/components/Tweets.vue';
 import { useRouter } from "vue-router";
 
+const router = useRouter();
+
+</script>
+
+<script>
+
+import {useRouter} from 'vue-router';
+
+export default {
+name: 'home',
+components: {
+},
+
+data() {
+  
+  return {
+    
+  }
+},
+
+created: function () {
+    this.checkLogin()
+  },
+
+methods: {
+  async checkLogin()
+	{
+    if (sessionStorage.getItem("loggedin") === null) {
+      this.$router.push({path: '/'});
+    }
+	},
+},
+}
 
 </script>
 

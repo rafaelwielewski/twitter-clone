@@ -16,6 +16,7 @@ class Register {
 
     public function execute(RegisterInput $input) 
     {
+
         $register = new UserRegister();;
         $register->setDate(new DateTime());
         $register->setRegisterName(new Name($input->nameRegister));
@@ -23,6 +24,7 @@ class Register {
         $register->setRegisterPassword(new Password($input->passwordRegister));
 
         $this->registerRepositoryContract->save($register);
+
     }
 
 }

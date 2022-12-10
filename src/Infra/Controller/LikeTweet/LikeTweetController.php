@@ -17,8 +17,9 @@ class LikeTweetController implements Controller {
     public function handle(HttpRequest $httpRequest): HttpResponse
     {
         $input = new LikeTweetInput();
-        $input->tweetId = $httpRequest->body['tweetId'];
-        
+        $input->tweetId = $httpRequest->body['idtweet'];
+        $input->userid = $httpRequest->body['userid'];
+
         $output = $this->likeTweetUsecase->execute($input);
         return new HttpResponse(HttpResponse::HTTP_SUCCESS_CODE, $output);
     }

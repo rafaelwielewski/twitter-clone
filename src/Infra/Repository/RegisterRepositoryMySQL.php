@@ -2,6 +2,7 @@
 
 namespace App\Infra\Repository;
 
+use App\Application\UseCase\Register\RegisterOutput;
 use App\Domain\Contract\RegisterRepositoryContract;
 use App\Domain\Entity\UserRegister;
 use App\Infra\Database\DB;
@@ -29,6 +30,7 @@ class RegisterRepositoryMySQL implements RegisterRepositoryContract {
             'date' => $register->getDate()
             ]);
 
+    
         } else {
             throw new DomainException("this username isn't available. please try another");
         } 

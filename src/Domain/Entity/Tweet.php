@@ -1,21 +1,26 @@
 <?php
 namespace App\Domain\Entity;
 
+use App\Domain\Entity\ValueObject\Iduser;
+use App\Domain\Entity\ValueObject\Name;
+use App\Domain\Entity\ValueObject\Username;
 use DateTime;
 use DomainException;
 
 class Tweet {
     
-    private string $text;
+    private string $tweetText;
     private string $tweetId;
+    private Iduser $tweetIduser;
+    private Name $tweetName;
+    private Username $tweetUsername;
     private DateTime $date;
-    private UserTweet $userTweet;
 
-    public function setText(string $text)
+    public function setTweetText(string $tweetText)
     {
         $maxCharactersAllowed = 255;
-        if (strlen($text) >= $maxCharactersAllowed) throw new DomainException('The text must be less than 255 characters');
-        $this->text = $text;
+        if (strlen($tweetText) >= $maxCharactersAllowed) throw new DomainException('The text must be less than 255 characters');
+        $this->tweetText = $tweetText;
     }
 
     public function setDate(DateTime $date)
@@ -23,9 +28,9 @@ class Tweet {
         $this->date = $date;
     }
 
-    public function getText(): string
+    public function getTweetText(): string
     {
-        return $this->text;
+        return $this->tweetText;
     }
 
     public function getDate(): string
@@ -33,19 +38,6 @@ class Tweet {
         return $this->date->format('Y-m-d H:i:s');
     }
 
-    public function setUserTweet(UserTweet $userTweet)
-    {
-        $this->userTweet = $userTweet;
-    }
-
-    public function getTweetNameUser(): string
-    {
-        return $this->userTweet->getTweetNameUser();
-    }
-    public function getTweetUsernameUser(): string
-    {
-        return $this->userTweet->getTweetUsernameUser();
-    }
 	public function getTweetId(): string {
 		return $this->tweetId;
 	}
@@ -54,4 +46,32 @@ class Tweet {
 		$this->tweetId = $tweetId;
 		return $this;
 	}
+
+    public function setTweetIduser(Iduser $iduser)
+    {
+        $this->tweetIduser = $iduser;
+    }
+    public function getTweetIduser(): string
+    {
+        return $this->tweetIduser->getIduser();
+    }
+    public function setTweetUsername(Username $username): self {
+		$this->tweetUsername = $username;
+		return $this;
+	}
+
+	public function getTweetUsername(): string {
+		return $this->tweetUsername->getUsername();
+	}
+
+	public function setTweetName(Name $name): self {
+		$this->tweetName = $name;
+		return $this;
+	}
+
+	public function getTweetName(): string {
+		return $this->tweetName->getName();
+	}
 }
+
+

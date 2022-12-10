@@ -17,37 +17,59 @@ class LikeTweetRepositoryMySQL implements LikeTweetRepositoryContract {
         $sql = 'SELECT * FROM tb_likes WHERE (idtweet, iduser) = (:tweetId, :iduser)';
         $results = $this->db->findAll($sql, [
             'tweetId' => $like->getTweetId(),
-            'iduser' => "1"//colocar da session
+            'iduser' => $like->getTweetIduser(),
         ]);
 
+
         if (count($results) === 0) {
+
             $sql = 'INSERT INTO tb_likes (idtweet, iduser) VALUES (:tweetId, :iduser)';
                 $this->db->execute($sql, [
                 'tweetId' => $like->getTweetId(),
-                'iduser' => "1"//colocar da session
+                'iduser' => $like->getTweetIduser(),
             ]);
-            /*$results2 = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_likes WHERE (idtweet) = (:idtweet)", [
-                ':idtweet'=>$idtweet,
+
+            $sql = 'SELECT COUNT(idlike) AS nrtotal FROM tb_likes WHERE idtweet = (:tweetId)';
+            $total = $this->db->findAll($sql, [
+                'tweetId' => $like->getTweetId(),
+
             ]);
-    
-            $result2Total = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
-    
-            $total = (int)$result2Total[0]["nrtotal"];
-    
-            $resultlikes = $sql->select("UPDATE tb_tweets
-            SET 
-                deslikes = :total
-            WHERE idtweet = :idtweet;", array(
-                ":idtweet"=>$idtweet,
-                ":total"=>$total
-            ));*/
-            
+
+            $total2 = (int)$total[0]['nrtotal'];
+
+
+            $sql = "UPDATE tb_tweets SET deslikes = :total WHERE idtweet = :tweetId";
+            $this->db->execute($sql, [
+                'tweetId' => $like->getTweetId(),
+                ":total"=>$total2,
+            ]);
+
+            return $total2;
+
         }else {
+          
             $sql = 'DELETE FROM tb_likes WHERE (idtweet, iduser) = (:tweetId, :iduser)';
                 $this->db->execute($sql, [
                 'tweetId' => $like->getTweetId(),
-                'iduser' => "1"//colocar da session
+                'iduser' => $like->getTweetIduser(),
             ]);
+
+            $sql = 'SELECT COUNT(idlike) AS nrtotal FROM tb_likes WHERE idtweet = (:tweetId)';
+            $total = $this->db->findAll($sql, [
+                'tweetId' => $like->getTweetId(),
+
+            ]);
+
+            $total2 = (int)$total[0]['nrtotal'];
+
+            $sql = "UPDATE tb_tweets SET deslikes = :total WHERE idtweet = :tweetId";
+            $this->db->execute($sql, [
+                'tweetId' => $like->getTweetId(),
+                ":total"=>$total2,
+            ]);
+            
+            return $total2;
+            
         }
 
     }
