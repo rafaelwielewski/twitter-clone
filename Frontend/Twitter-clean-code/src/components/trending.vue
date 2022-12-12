@@ -57,15 +57,14 @@
     return {
       dropdown: false,
       trending: [
-        {top: 'techies all around', title: 'Tech', bottom: 'The technology'},
-        {top: 'Apps', title: 'Flutter', bottom: '100K Tweets'},
-        {top: 'Animals', title: 'Shark larger than Great white', bottom: '115k tweets'},
-        {top: 'The techies nation', title: '2m servers', bottom: '30k tweets'},
+        {top: '', title: '', bottom: 'The '},
+        {top: '', title: '', bottom: 'The '},
+        {top: '', title: '', bottom: 'The '},
       ],
       follow: [
-        {src: 'https://randomuser.me/api/portraits/men/79.jpg', name: 'Kriss Kovan', handle: '@kriss'},
-        {src: 'https://randomuser.me/api/portraits/men/70.jpg', name: 'Danny D', handle: '@theD'},
-        {src: 'https://randomuser.me/api/portraits/men/27.jpg', name: 'Hubert Aly', handle: '@alyway'}
+        {src: '', name: '', handle: '@'},
+        {src: '', name: '', handle: '@'},
+        {src: '', name: '', handle: '@'},
       ],
     }
   }
