@@ -24,13 +24,12 @@ class LoginRepositoryMySQL implements LoginRepositoryContract {
         if (password_verify($login->getLoginPassword(), $results["despassword"]) === true)
 		
         {
-            session_start();//tirar
-            session_regenerate_id();
+            //session_start();//tirar
+           // session_regenerate_id();
 		    $session['loggedin'] = TRUE;
             $session['iduser'] = $results["iduser"];
             $session['name'] = $results["desname"];
 		    $session['username'] = $results["deslogin"];
-		    $session['password'] = $results["despassword"];
             return ($session);
 
 	    } else {

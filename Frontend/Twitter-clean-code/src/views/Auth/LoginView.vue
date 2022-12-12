@@ -1,94 +1,97 @@
 <template>
-    <main>
-        <div class="single-product-area">
-            <div class="zigzag-bottom"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="alert alert-danger">
-                        </div>
-                        <form class="form-login" @submit.prevent="login">
-                            <h2>Acessar</h2>
-                            <p class="form-row form-row-first">
-                                <label for="login">Username <span class="required">*</span>
-                                </label>
-                                <input type="text" v-model="username" id="username" name="username" class="input-text">
-                            </p>
-                            <p class="form-row form-row-last">
-                                <label for="senha">Senha <span class="required">*</span>
-                                </label>
-                                <input type="password" v-model="password" id="senha" name="password" class="input-text">
-                            </p>
-                            <p class="form-row">
-                                <input type="submit" value="Login" class="button">
-                                <label class="inline" for="rememberme"><input type="checkbox" value="forever"
-                                        id="rememberme" name="rememberme"> Manter conectado </label>
-                            </p>
-                            <p class="lost_password">
-                                <a href="/forgot">Esqueceu a senha?</a>
-                            </p>
-                            
-                            <br><span class="alert alert-danger" v-if="errors.login">{{ errors.login }}</span>
-                            
-                            <div class="clear"></div>
-                        </form>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="alert alert-danger">
-                        </div>
-                        <form class="register" @submit.prevent="register">
-                            <h2>Criar conta</h2>
-                            <p class="form-row form-row-first">
-                                <label for="nome">Nome Completo <span class="required">*</span>
-                                </label>
-                                <input type="text" v-model="registerName" id="registerName" name="registerName"
-                                    class="input-text">
-                            </p>
-                            <p class="form-row form-row-first">
-                                <label for="login">Usename <span class="required">*</span>
-                                </label>
-                                <input type="text" v-model="registerUsername" id="registerUsername"
-                                    name="registerUsername" class="input-text">
-                            </p>
-                            <p class="form-row form-row-last">
-                                <label for="senha">Senha <span class="required">*</span>
-                                </label>
-                                <input type="password" v-model="registerPassword" id="registerPassword"
-                                    name="registerPassword" class="input-text">
-                            </p>
-                            <div class="clear"></div>
-
-                            <p class="form-row">
-                                <input type="submit" value="Criar Conta" name="create" class="button">
-                            </p>
-
-                            <div class="clear"></div>
-                        </form>
-                    </div>
-                </div>
+        <div class="
+      flex
+      justify-center
+      container
+      mx-auto
+      h-screen
+      w-1/4
+      px-4
+      lg:px-0
+      py-8
+      bg-white
+    ">
+            <div>
+                <IconTwitter :size="30" class="w-full text-blue"/>
+                <h1 class="pt-12 text-4xl dark:text-lightest font-bold">
+                    Log in to Twitter
+                </h1>
+                <form @submit.prevent="login()" class="w-full text-center">
+                    <input v-model="input.username" type="text" placeholder="Username" class="
+            w-full
+            px-2
+            py-2
+            my-6
+            border-2 border-lighter
+            text-xl
+            rounded
+            dark:border-dark
+            focus:outline-none
+            dark:bg-black
+            dark:text-light
+            focus:border-blue
+            dark:focus:border-blue
+            transition-colors
+            duration-75
+          " />
+                    <input v-model="input.password" type="password" placeholder="Password" class="
+            w-full
+            px-2
+            py-2
+            mb-6
+            border-2 border-lighter
+            text-xl
+            rounded
+            dark:border-dark
+            focus:outline-none
+            dark:bg-black
+            dark:text-light
+            focus:border-blue
+            dark:focus:border-blue
+            transition-colors
+            duration-75
+          " />
+                    <button type="submit" class="bg-black hover:opacity-75 rounded-full focus:outline-none w-full h-12" :class="
+                        inputEmpty
+                            ? 'cursor-not-allowed'
+                            : 'cursor-pointer'
+                    " :disabled="inputEmpty">
+                        <LoadingSpinner v-if="loading" color="white" size="36px" />
+                        <span v-else class="text-lightest text-lg font-semibold">Log in</span>
+                    </button>
+                    <button class="p-4">
+                    <router-link to="/">
+                        <span class="text-blue hover:underline">Sign up for Twitter</span>
+                    </router-link>
+                </button>
+                </form>
             </div>
         </div>
-
-    </main>
 </template>
-
+  
 <script>
 
 import http from '@/services/http';
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router'
+import { computed, defineComponent, reactive, ref } from 'vue'
+import IconTwitter from '../../icons/IconTwitter.vue'
 
-export default {
+export default defineComponent({
     name: 'tweets',
     components: {
+        IconTwitter,
     },
+    
+
     data() {
         return {
             errors: {
                 login: '',
             },
-            username: "rafael",
-            password: "Rafa12345",
+            input: {
+                username: "rafael",
+                password: "Rafa12345",
+            },
             registerName: "",
             registerUsername: "",
             registerPassword: "",
@@ -106,11 +109,14 @@ export default {
         }
     },
 
+
     mounted: function () {
         this.checkLogin()
     },
 
+
     methods: {
+        
         async checkLogin() {
             if (sessionStorage.getItem("loggedin") === 'true') {
                 this.$router.push({ path: '/home' });
@@ -120,12 +126,12 @@ export default {
 
             try {
                 const { data } = await http.post("/post-login", {
-                    username: this.username,
-                    password: this.password,
+                    username: this.input.username,
+                    password: this.input.password,
                 });
 
                 console.log(data);
-                
+
                 if (data.loggedin === true) {
                     sessionStorage.setItem('loggedin', data.loggedin);
                     sessionStorage.setItem('iduser', data.iduser);
@@ -170,14 +176,16 @@ export default {
         },
     },
 
-}
-
-
-
-
-
-
+})
 
 
 </script>
+  
+  
+<style>
 
+
+
+</style>
+  
+  
