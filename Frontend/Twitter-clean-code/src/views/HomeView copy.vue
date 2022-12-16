@@ -1,14 +1,14 @@
 <template>
   <main>
-    <div id="home" class="flex container h-screen w-full ">
+    <div id="home" class="flex container h-screen w-full grid grid-cols-3">
       <div class="lg:w-1/5 border-r border-lighter px-2 lg:px-6 py-2 flex flex-col justify-between">
         <Sidebar />
       </div>
-      <div class="w-full md:w-1/2 h-full overflow-y-scroll">
+      <div class="w-full md:w-1/2 h-full ">
         <nav class="sticky top-0 z-10">
           <NavBar />
         </nav>
-        <div class="">
+        <div>
           <CreateTweet @refresh="getTweet" />
           <Tweet :sendTweet=tweet />
         </div>
@@ -56,7 +56,7 @@ export default {
   methods: {
     async checkLogin() {
       if (sessionStorage.getItem("loggedin") === null) {
-        this.$router.push({ path: '/login' });
+        this.$router.push({ path: '/' });
       }
     },
     async getTweet() {

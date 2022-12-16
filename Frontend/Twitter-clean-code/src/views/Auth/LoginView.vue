@@ -1,23 +1,12 @@
 <template>
-        <div class="
-      flex
-      justify-center
-      container
-      mx-auto
-      h-screen
-      w-1/4
-      px-4
-      lg:px-0
-      py-8
-      bg-white
-    ">
-            <div>
-                <IconTwitter :size="30" class="w-full text-blue"/>
-                <h1 class="pt-12 text-4xl dark:text-lightest font-bold">
-                    Log in to Twitter
-                </h1>
-                <form @submit.prevent="login()" class="w-full text-center">
-                    <input v-model="input.username" type="text" placeholder="Username" class="
+    <div class="flex justify-center container mx-auto h-screen w-1/4 px-4 lg:px-0 py-8 bg-white">
+        <div>
+            <IconTwitter :size="30" class="w-full text-blue" />
+            <h1 class="pt-12 text-4xl dark:text-lightest font-bold">
+                Log in to Twitter
+            </h1>
+            <form @submit.prevent="login()" class="w-full text-center">
+                <input v-model="input.username" type="text" placeholder="Username" class="
             w-full
             px-2
             py-2
@@ -34,7 +23,7 @@
             transition-colors
             duration-75
           " />
-                    <input v-model="input.password" type="password" placeholder="Password" class="
+                <input v-model="input.password" type="password" placeholder="Password" class="
             w-full
             px-2
             py-2
@@ -51,22 +40,23 @@
             transition-colors
             duration-75
           " />
-                    <button type="submit" class="bg-black hover:opacity-75 rounded-full focus:outline-none w-full h-12" :class="
+                <button type="submit" class="bg-black hover:opacity-75 rounded-full focus:outline-none w-full h-12"
+                    :class="
                         inputEmpty
                             ? 'cursor-not-allowed'
                             : 'cursor-pointer'
                     " :disabled="inputEmpty">
-                        <LoadingSpinner v-if="loading" color="white" size="36px" />
-                        <span v-else class="text-lightest text-lg font-semibold">Log in</span>
-                    </button>
-                    <button class="p-4">
+                    <LoadingSpinner v-if="loading" color="white" size="36px" />
+                    <span v-else class="text-lightest text-lg font-semibold">Log in</span>
+                </button>
+                <button class="p-4">
                     <router-link to="/">
                         <span class="text-blue hover:underline">Sign up for Twitter</span>
                     </router-link>
                 </button>
-                </form>
-            </div>
+            </form>
         </div>
+    </div>
 </template>
   
 <script>
@@ -77,11 +67,11 @@ import { computed, defineComponent, reactive, ref } from 'vue'
 import IconTwitter from '../../icons/IconTwitter.vue'
 
 export default defineComponent({
-    name: 'tweets',
+    name: 'login',
     components: {
         IconTwitter,
     },
-    
+
 
     data() {
         return {
@@ -95,16 +85,7 @@ export default defineComponent({
             registerName: "",
             registerUsername: "",
             registerPassword: "",
-            formFields: {
-                username: sessionStorage.getItem("username"),
-                file: null,
-            },
-            list: [],
             profileImg: '',
-            profileImgTweet: '',
-            dropdown: false,
-
-            tweet: { text: '' },
 
         }
     },
@@ -116,12 +97,29 @@ export default defineComponent({
 
 
     methods: {
-        
+
         async checkLogin() {
             if (sessionStorage.getItem("loggedin") === 'true') {
-                this.$router.push({ path: '/home' });
+                this.$router.push({ path: '/' });
             }
         },
+
+        async getProfileImg() {
+
+            try {
+                const { data } = await http.post("/get-profileimg", {
+                    username: sessionStorage.getItem('username'),
+                });
+
+                sessionStorage.setItem('profileImg', data);
+
+                this.profileImg = data;
+
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
         async login() {
 
             try {
@@ -140,8 +138,8 @@ export default defineComponent({
                     sessionStorage.setItem('password', data.password);
 
                     console.log(sessionStorage);
-
-                    this.$router.push({ path: "/home" });
+                    this.getProfileImg()
+                    this.$router.push({ path: "/" });
                 }
                 if (data === 'Your username or password is incorrect') {
                     this.errors.login = 'Your username or password is incorrect';
@@ -183,8 +181,6 @@ export default defineComponent({
   
   
 <style>
-
-
 
 </style>
   
