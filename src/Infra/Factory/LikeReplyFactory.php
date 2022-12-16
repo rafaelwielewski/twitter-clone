@@ -8,19 +8,19 @@ use App\Infra\Controller\Handler;
 use App\Infra\Controller\Like\LikeController;
 use App\Infra\Database\MySQL;
 use App\Infra\Factory\Contract\ControllerFactoryContract;
-use App\Infra\Repository\LikeTweetRepositoryMySQL;
+use App\Infra\Repository\LikeReplyRepositoryMySQL;
 
 /**
  * @codeCoverageIgnore
  */
-class LikeTweetFactory implements ControllerFactoryContract {
+class LikeReplyFactory implements ControllerFactoryContract {
     
     public static function getController(): Controller
     {
         return new Handler(
             new LikeController(
                 new Like(
-                    new LikeTweetRepositoryMySQL(new MySQL)
+                    new LikeReplyRepositoryMySQL(new MySQL)
                 )
             )
         );    

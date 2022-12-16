@@ -7,7 +7,7 @@
       <div class="w-full md:w-1/2 h-full overflow-y-scroll">
         <NavBar />
         <Tweet :sendTweet =tweet />
-        <CreateReply :sendTweet =tweet @refresh="getReply"/>
+        <CreateReply :sendTweet =tweet @refresh="refresh"/>
         <Reply :sendReply =reply />
       </div>
       <div class="md:block hidden w-1/3 h-full border-l border-lighter py-2 px-6 overflow-y-scroll relative">
@@ -22,7 +22,7 @@
 import Sidebar from '@/components/Sidebar.vue';
 import Trending from '@/components/trending.vue';
 import NavBar from '@/components/NavBar.vue';
-import Tweet from '@/components/Tweet/Tweet2.vue';
+import Tweet from '@/components/Tweet/Tweet.vue';
 import Reply from '@/components/Tweet/Reply.vue';
 import CreateReply from '@/components/Tweet/CreateReply.vue';
 import { useRouter } from "vue-router";
@@ -31,6 +31,7 @@ import http from '@/services/http';
 const router = useRouter();
 
 </script>
+
 
 <script>
 
@@ -57,6 +58,11 @@ export default {
       if (sessionStorage.getItem("loggedin") === null) {
         this.$router.push({ path: '/' });
       }
+    },
+
+    async refresh() {
+      this.getReply()
+      this.getTweet()
     },
 
     async getReply() {

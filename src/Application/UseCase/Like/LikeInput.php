@@ -2,7 +2,7 @@
 
 namespace App\Application\UseCase\Like;
 
-class LikeTweetInput {
+class LikeInput {
     public string $tweetId;
     public string $userid;
 }

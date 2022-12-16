@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div id="home" class="flex container h-screen w-full ">
+    <div id="suggested" class="flex container h-screen w-full ">
       <div class="lg:w-1/5 border-r border-lighter px-2 lg:px-6 py-2 flex flex-col justify-between">
         <Sidebar />
       </div>
@@ -9,8 +9,7 @@
           <NavBar />
         </nav>
         <div class="">
-          <CreateTweet @refresh="getTweet" />
-          <Tweet :sendTweet=tweet />
+
         </div>
       </div>
       <div class="md:block hidden w-1/3 h-full border-l border-lighter py-2 px-6 relative">
@@ -25,8 +24,6 @@
 import Sidebar from '@/components/Sidebar.vue';
 import Trending from '@/components/trending.vue';
 import NavBar from '@/components/NavBar.vue';
-import Tweet from '@/components/Tweet/Tweet.vue';
-import CreateTweet from '@/components/Tweet/CreateTweet.vue';
 import { useRouter } from "vue-router";
 import http from '@/services/http';
 
@@ -37,20 +34,20 @@ const router = useRouter();
 <script>
 
 export default {
-  name: 'home',
+  name: 'suggested',
   components: {
   },
 
   data() {
 
     return {
-      tweet: "",
+      suggested: "",
     }
   },
 
   created: function () {
     this.checkLogin()
-    this.getTweet()
+
   },
 
   methods: {
@@ -59,13 +56,13 @@ export default {
         this.$router.push({ path: '/login' });
       }
     },
-    async getTweet() {
+    async getSuggested() {
 
       try {
-        const { data } = await http.get("/get-tweets", {
+        const { data } = await http.get("/get-suggested", {
         });
 
-        this.tweet = data
+        this.suggested = data
         console.log(data);
 
       } catch (error) {

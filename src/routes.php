@@ -2,12 +2,15 @@
 
 use App\Infra\Controller\Home\HomeController;
 use App\Infra\Factory\CheckLikeTweetFactory;
+use App\Infra\Factory\CheckLikeReplyFactory;
 use App\Infra\Factory\GetProfileImgFactory;
 use App\Infra\Factory\HomeFactory;
 use App\Infra\Factory\LikeTweetFactory;
+use App\Infra\Factory\LikeReplyFactory;
 use App\Infra\Factory\LoginFactory;
 use App\Infra\Factory\PostReplyFactory;
 use App\Infra\Factory\PostTweetFactory;
+use App\Infra\Factory\ProfileFactory;
 use App\Infra\Factory\ProfileImgFactory;
 use App\Infra\Factory\RegisterFactory;
 use App\Infra\Factory\ShowAllTweetsFactory;
@@ -23,11 +26,6 @@ use Slim\Views\PhpRenderer;
 header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Headers: Content-Type");
 
-// $app = AppFactory::create();
-
-// //$app->post('/', LoginController::class . ':handle');
-// $app->post('/post-profileimg', ProfileImgRepository::class . ':saveImg');
-// $app->run();
 
 $http = new SlimHttpAdapter(AppFactory::create());
 
@@ -42,6 +40,9 @@ $http->on('post', '/get-replies', new ShowRepliesFactory, []);
 $http->on('get', '/get-usertweets', new ShowUserTweetsFactory, []);
 $http->on('post', '/get-onetweet', new ShowOneTweetFactory, []);
 $http->on('post', '/post-liketweet', new LikeTweetFactory, []);
+$http->on('post', '/post-likereply', new LikeReplyFactory, []);
 $http->on('post', '/post-checkliketweet', new CheckLikeTweetFactory, []);
+$http->on('post', '/post-checklikereply', new CheckLikeReplyFactory, []);
+$http->on('post', '/get-profile', new ProfileFactory, []);
 
 $http->run();

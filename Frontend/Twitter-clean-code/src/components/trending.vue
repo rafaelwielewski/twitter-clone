@@ -39,7 +39,7 @@
             Follow
           </button>
         </button>
-        <button class="p-3 w-full hover:bg-lighter text-left text-blue border-t border-lighter">
+        <button class="p-3 w-full hover:bg-lighter text-left text-blue border-t border-lighter" @click="router.push(`/connect_people`)">
           Show More
         </button>
       </div>
@@ -47,6 +47,16 @@
   </div>
 </template>
   
+
+<script setup>
+
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+</script>
+
+
+
 <script>
   export default {
   name: 'trending',

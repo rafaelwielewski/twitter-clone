@@ -7,36 +7,124 @@ use App\Domain\Entity\ValueObject\Username;
 
 class User {
 
-    private Name $userName;
-    private Username $userUsername;
-    private Password $userPassword;
+    private Name $name;
+    private Username $username;
+    private Password $password;
+    private $iduser;
+    private $profileImg;
+    private $joined;
+    private $location;
+    private $website;
+    private $bio;
+    private $following;
+    private $followers;
+
 
     public function __construct()
     {}
 
-    public function setUserName(Name $name)
+    public function setName(Name $name)
     {
-        $this->userName = $name;
+        $this->name = $name;
     }
-    public function getUserName(): string
+    public function getName(): string
     {
-        return $this->userName->getName();
+        return $this->name->getName();
     }
-    public function setUserUsername(Username $username)
+    public function setUsername(Username $username)
     {
-        $this->userUsername = $username;
+        $this->username = $username;
     }
-    public function getUserUsername(): string
+    public function getUsername(): string
     {
-        return $this->userUsername->getUsername();
+        return $this->username->getUsername();
     }
-    public function setUserPassword(Password $password)
+    public function setPassword(Password $password)
     {
-        $this->userPassword = $password;
+        $this->password = $password;
     }
-    public function getUserPassword(): string
+    public function getPassword(): string
     {
-        return $this->userPassword->getPassword();
+        return $this->password->getPassword();
     }
-    
+	
+	public function getIduser() {
+		return $this->iduser;
+	}
+	
+	public function setIduser($iduser): self {
+		$this->iduser = $iduser;
+		return $this;
+	}
+	
+	
+	public function getProfileImg() {
+		return $this->profileImg;
+	}
+
+	public function setProfileImg($profileImg): self {
+		$this->profileImg = $profileImg;
+		return $this;
+	}
+	
+	
+	public function getJoined() {
+		return $this->joined;
+	}
+	
+	public function setJoined($joined): self {
+		$this->joined = $joined;
+		return $this;
+	}
+	
+	
+	public function getLocation() {
+		return $this->location;
+	}
+
+	public function setLocation($location): self {
+		$this->location = $location;
+		return $this;
+	}
+	
+	
+	public function getWebsite() {
+		return $this->website;
+	}
+	
+
+	public function setWebsite($website): self {
+		$this->website = $website;
+		return $this;
+	}
+	
+	
+	public function getBio() {
+		return $this->bio;
+	}
+	
+	public function setBio($bio): self {
+		$this->bio = $bio;
+		return $this;
+	}
+	
+	
+	public function getFollowing() {
+		return $this->following;
+	}
+	
+	public function setFollowing($following): self {
+		$this->following = $following;
+		return $this;
+	}
+	
+	
+	public function getFollowers() {
+		return $this->followers;
+	}
+
+	public function setFollowers($followers): self {
+		$this->followers = $followers;
+		return $this;
+	}
 }

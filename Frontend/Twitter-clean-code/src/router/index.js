@@ -13,20 +13,25 @@ const router = createRouter({
        {
          path: '/',
          name: 'home',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
          component: () => import('../views/HomeView.vue')
        },
+       {
+        path: '/',
+        name: 'home',
+        component: () => import('../views/HomeView.vue')
+      },
 
        {
-        path: '/:id2/status/:id',
-        name: 'TweetDialog',
-   //   // route level code-splitting
-   //   // this generates a separate chunk (About.[hash].js) for this route
-   //   // which is lazy-loaded when the route is visited.
-        component: () => import('../views/TweetDialogView.vue')
+        path: '/:id',
+        name: 'profile',
+        component: () => import('../views/ProfileView.vue')
       },
+      {
+        path: '/connect_people',
+        name: 'Suggested',
+        component: () => import('../views/SuggestedView.vue')
+      },
+      
 
   ]
 })

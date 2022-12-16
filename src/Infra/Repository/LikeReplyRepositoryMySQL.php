@@ -7,40 +7,40 @@ use App\Domain\Entity\Tweet;
 use App\Infra\Database\DB;
 use DomainException;
 
-class LikeTweetRepositoryMySQL implements LikeRepositoryContract {
+class LikeReplyRepositoryMySQL implements LikeRepositoryContract {
 
     public function __construct(private DB $db)
     {}
 
     public function like(Tweet $like)
     {
-        $sql = 'SELECT * FROM tb_likes WHERE (idtweet, iduser) = (:tweetId, :iduser)';
+        $sql = 'SELECT * FROM tb_likesreply WHERE (idreply, iduser) = (:idreply, :iduser)';
         $results = $this->db->findAll($sql, [
-            'tweetId' => $like->getTweetId(),
+            'idreply' => $like->getTweetId(),
             'iduser' => $like->getTweetIduser(),
         ]);
 
 
         if (count($results) === 0) {
 
-            $sql = 'INSERT INTO tb_likes (idtweet, iduser) VALUES (:tweetId, :iduser)';
+            $sql = 'INSERT INTO tb_likesreply (idreply, iduser) VALUES (:idreply, :iduser)';
                 $this->db->execute($sql, [
-                'tweetId' => $like->getTweetId(),
+                'idreply' => $like->getTweetId(),
                 'iduser' => $like->getTweetIduser(),
             ]);
 
-            $sql = 'SELECT COUNT(idlike) AS nrtotal FROM tb_likes WHERE idtweet = (:tweetId)';
+            $sql = 'SELECT COUNT(idlike) AS nrtotal FROM tb_likesreply WHERE idreply = (:idreply)';
             $total = $this->db->findAll($sql, [
-                'tweetId' => $like->getTweetId(),
+                'idreply' => $like->getTweetId(),
 
             ]);
 
             $total2 = (int)$total[0]['nrtotal'];
 
 
-            $sql = "UPDATE tb_tweets SET deslikes = :total WHERE idtweet = :tweetId";
+            $sql = "UPDATE tb_replies SET deslikes = :total WHERE idreply = :idreply";
             $this->db->execute($sql, [
-                'tweetId' => $like->getTweetId(),
+                'idreply' => $like->getTweetId(),
                 ":total"=>$total2,
             ]);
 
@@ -48,23 +48,23 @@ class LikeTweetRepositoryMySQL implements LikeRepositoryContract {
 
         }else {
           
-            $sql = 'DELETE FROM tb_likes WHERE (idtweet, iduser) = (:tweetId, :iduser)';
+            $sql = 'DELETE FROM tb_replies WHERE (idreply, iduser) = (:idreply, :iduser)';
                 $this->db->execute($sql, [
-                'tweetId' => $like->getTweetId(),
+                'idreply' => $like->getTweetId(),
                 'iduser' => $like->getTweetIduser(),
             ]);
 
-            $sql = 'SELECT COUNT(idlike) AS nrtotal FROM tb_likes WHERE idtweet = (:tweetId)';
+            $sql = 'SELECT COUNT(idlike) AS nrtotal FROM tb_likesreply WHERE idreply = (:idreply)';
             $total = $this->db->findAll($sql, [
-                'tweetId' => $like->getTweetId(),
+                'idreply' => $like->getTweetId(),
 
             ]);
 
             $total2 = (int)$total[0]['nrtotal'];
 
-            $sql = "UPDATE tb_tweets SET deslikes = :total WHERE idtweet = :tweetId";
+            $sql = "UPDATE tb_replies SET deslikes = :total WHERE idreply = :idreply";
             $this->db->execute($sql, [
-                'tweetId' => $like->getTweetId(),
+                'idreply' => $like->getTweetId(),
                 ":total"=>$total2,
             ]);
             

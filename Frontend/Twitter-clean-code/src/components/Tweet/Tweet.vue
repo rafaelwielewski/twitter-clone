@@ -1,7 +1,7 @@
 <template>
   <div id="Tweet">
     <div class="flex flex-col-reverse">
-      <div v-for="(tweet, index) in list" :key="index" class="w-full p-4 border-b hover:bg-lighter flex">
+      <div v-for="(tweet, index) in sendTweet" :key="index" class="w-full p-4 border-b hover:bg-lighter flex">
           <div class="flex-none mr-4">
             <img :src="tweet.profileImg" class="h-12 w-12 rounded-full flex-none" />
           </div>
@@ -45,6 +45,8 @@
 
 import ToggleFavorite from "@/components/like/ToggleFavorite.vue";
 import { useRouter } from "vue-router";
+import http from '@/services/http';
+
 const router = useRouter();
 
 </script>
@@ -56,15 +58,19 @@ export default {
   components: {
     ToggleFavorite,
   },
+
+  props: {
+    sendTweet: String,
+  },
+
   data() {
     return {
       userid: sessionStorage.getItem("iduser"),
-      list: [],
     }
   },
 
   mounted: function () {
-    this.getTweetlist()
+ 
   },
 
   methods: {
@@ -78,50 +84,14 @@ export default {
           userid: this.userid,
 
         });
-        this.list[$index].deslikes = data
+        this.sendTweet[$index].deslikes = data
 
       } catch (error) {
         console.log(error);
       }
     },
-
-    async getTweetlist() {
-
-      try {
-        const { data } = await http.get("/get-tweets", {
-        });
-
-        this.list = data
-
-
-
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async getTweet($idtweet, $index) {
-
-      try {
-        const { data } = await http.get("/get-tweet", {
-          idtweet: $idtweet,
-        });
-        console.log('recarregado');
-        //this.list = data
-
-
-
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
   }
-
 }
-
-
-import http from '@/services/http';
-
 
 </script>
 

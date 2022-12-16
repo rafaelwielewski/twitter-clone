@@ -6,7 +6,7 @@ use App\Domain\Contract\CheckLikeRepositoryContract;
 use App\Domain\Entity\Tweet;
 use App\Infra\Database\DB;
 
-class CheckLikeTweetRepositoryMySQL implements CheckLikeRepositoryContract {
+class CheckLikeReplyRepositoryMySQL implements CheckLikeRepositoryContract {
 
     public function __construct(private DB $db)
     {}
@@ -14,9 +14,9 @@ class CheckLikeTweetRepositoryMySQL implements CheckLikeRepositoryContract {
     public function checkLike(Tweet $like)
     {
 
-        $sql = 'SELECT * FROM tb_likes WHERE (idtweet, iduser) = (:tweetId, :iduser)';
+        $sql = 'SELECT * FROM tb_likesreply WHERE (idreply, iduser) = (:idreply, :iduser)';
         $results = $this->db->findAll($sql, [
-            'tweetId' => $like->getTweetId(),
+            'idreply' => $like->getTweetId(),
             'iduser' => $like->getTweetIduser(),
         ]);
 

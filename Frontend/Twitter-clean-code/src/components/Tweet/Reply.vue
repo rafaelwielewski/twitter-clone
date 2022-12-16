@@ -25,8 +25,8 @@
                 <p> {{ reply.desretweets }} </p>
               </div>
               <div class="flex items-center text-sm text-dark">
-                <button class="likecount" @click="likeTweet(reply.idreply, index)">
-                  <ToggleFavorite :sendIdtweet=reply.idreply :sendUserid=userid></ToggleFavorite>
+                <button class="likecount" @click="likeReply(reply.idreply, index)">
+                  <ToggleFavoriteReply :sendIdReply=reply.idreply :sendUserid=userid></ToggleFavoriteReply>
                 </button>
                 <p class="likecount2">{{ reply.deslikes }}</p>
               </div>
@@ -43,7 +43,7 @@
 
 <script setup>
 
-import ToggleFavorite from "@/components/like/ToggleFavorite.vue";
+import ToggleFavoriteReply from "@/components/like/ToggleFavoriteReply.vue";
 import { useRouter } from "vue-router";
 import http from '@/services/http';
 
@@ -56,7 +56,7 @@ const router = useRouter();
 export default {
   name: 'Reply',
   components: {
-    ToggleFavorite,
+    ToggleFavoriteReply,
   },
 
   props: {
@@ -76,10 +76,10 @@ export default {
   methods: {
 
 
-    async likeTweet($idreply, $index) {
+    async likeReply($idreply, $index) {
 
       try {
-        const { data } = await http.post("/post-liketweet", {
+        const { data } = await http.post("/post-likereply", {
           idtweet: $idreply,
           userid: this.userid,
 

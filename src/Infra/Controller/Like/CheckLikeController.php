@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Infra\Controller\LikeTweet;
+namespace App\Infra\Controller\Like;
 
-use App\Application\UseCase\Like\LikeTweetInput;
+use App\Application\UseCase\Like\LikeInput;
 use App\Infra\Controller\Controller;
 use App\Infra\Controller\HttpRequest;
 use App\Infra\Controller\HttpResponse;
 
-class CheckLikeTweetController implements Controller {
+class CheckLikeController implements Controller {
 
     public function __construct(
-        private $checkLikeTweetUsecase
+        private $checkLikeUsecase
     )
     {}
 
     public function handle(HttpRequest $httpRequest): HttpResponse
     {
-        $input = new LikeTweetInput();
+        $input = new LikeInput();
         $input->tweetId = $httpRequest->body['idtweet'];
         $input->userid = $httpRequest->body['userid'];
 
-        $output = $this->checkLikeTweetUsecase->execute($input);
+        $output = $this->checkLikeUsecase->execute($input);
 
         return new HttpResponse(HttpResponse::HTTP_SUCCESS_CODE, $output);
     }

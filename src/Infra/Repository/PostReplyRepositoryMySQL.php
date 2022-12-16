@@ -21,5 +21,21 @@ class PostReplyRepositoryMySQL implements PostReplyRepositoryContract {
             'idtweet' => $reply->getTweetId(),
             'date' => $reply->getDate()
         ]);
+
+        $sql = 'SELECT COUNT(desreply) AS nrtotal FROM tb_replies WHERE idtweet = (:idtweet)';
+        $result = $this->db->findAll($sql, [
+            'idtweet' => $reply->getTweetId(),
+        ]);
+
+        $total = (int)$result[0]['nrtotal'];
+        var_dump($total);
+        $sql = "UPDATE tb_tweets SET desreplies = :total WHERE idtweet = :tweetId";
+            $this->db->execute($sql, [
+                'tweetId' => $reply->getTweetId(),
+                ":total"=>$total,
+            ]);
+
+            return $total;
+        
     }
 }
