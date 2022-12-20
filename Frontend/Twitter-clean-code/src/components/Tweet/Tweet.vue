@@ -1,18 +1,18 @@
 <template>
   <div id="Tweet">
     <div class="flex flex-col-reverse">
-      <div v-for="(tweet, index) in sendTweet" :key="index" class="w-full p-4 border-b hover:bg-lighter flex">
-          <div class="flex-none mr-4">
+      <div v-for="(tweet, index) in sendTweet" :key="index" class="w-full p-4 border hover:bg-lighter flex">
+          <div class="flex-none mr-4 cursor-pointer" >
             <img :src="tweet.profileImg" class="h-12 w-12 rounded-full flex-none" />
           </div>
           <div class="w-full">
-            <div class="flex items-center w-full">
-              <p class="font-semibold hover:underline"> {{ tweet.desname }} </p>
-              <p class="text-sm text-dark ml-2 hover:underline"> @{{ tweet.deslogin }} </p>
+            <div class="flex items-center w-full cursor-pointer" >
+              <p class="text-base font-semibold hover:underline" @click="router.push(tweet.deslogin)"> {{ tweet.desname }} </p>
+              <p class="text-base text-dark ml-2 hover:underline" @click="router.push(tweet.deslogin)"> @{{ tweet.deslogin }} </p>
               <p class="text-sm text-dark ml-2 hover:underline"> {{ tweet.dtregister }} </p>
               <button @click="router.push(`/${tweet.deslogin}/status/${tweet.idtweet}`)" class="fas fa-angle-down text-dark ml-auto"></button>
             </div>
-            <p class="py-2">
+            <p class="py-2 text-base">
               {{ tweet.destweet }}
             </p>
             <div class="flex items-center justify-between w-full">

@@ -1,7 +1,7 @@
 <template>
   <div id="Reply">
     <div class="flex flex-col-reverse">
-      <div v-for="(reply, index) in sendReply" :key="index" class="w-full p-4 border-b hover:bg-lighter flex">
+      <div v-for="(reply, index) in sendReply" :key="index" class="w-full p-4 border hover:bg-lighter flex">
           <div class="flex-none mr-4">
             <img :src="reply.profileImg" class="h-12 w-12 rounded-full flex-none" />
           </div>

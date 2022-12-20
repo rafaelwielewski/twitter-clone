@@ -14,7 +14,6 @@
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",
     "dayjs": "^1.11.7",
-    "tailwindcss": "^1.9.6",
     "vue": "^3.2.45",
     "vue-axios": "^3.5.2",
     "vue-router": "^4.1.6",
@@ -22,12 +21,15 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.2.0",
+    "autoprefixer": "^10.4.13",
     "compass-mixins": "^0.12.12",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
     "node-sass": "^8.0.0",
+    "postcss": "^8.4.20",
     "sass": "^1.56.1",
     "sass-loader": "^13.2.0",
+    "tailwindcss": "^1.9.6",
     "vite": "^3.2.4",
     "vue-loader": "^17.0.1",
     "vue-template-compiler": "^2.7.14"

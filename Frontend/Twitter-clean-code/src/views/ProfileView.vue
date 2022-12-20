@@ -4,10 +4,7 @@
       <div class="lg:w-1/5 border-r border-lighter px-2 lg:px-6 py-2 flex flex-col justify-between">
         <Sidebar />
       </div>
-      <div class="w-full md:w-1/2 h-full">
-        <nav class="sticky top-0 z-10">
-          <NavBar />
-        </nav>
+      <div class="w-full md:w-1/2 h-full overflow-y-scroll">
         <div class="">
           <Profile />
         </div>

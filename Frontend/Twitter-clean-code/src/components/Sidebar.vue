@@ -5,34 +5,34 @@
         <i class="fab fa-twitter"></i>
       </button>
       <div>
-        <button v-for="(tab, index) in tabs" :key="index" @click="id = tab.id">
-          <router-link :to="`/${tab.link}`"
-            :class="`focus:outline-none hover:text-blue flex items-center py-2 px-4 hover:bg-lightblue rounded-full mr-auto mb-3 ${id === tab.id ? 'text-blue' : ''}`">
+        <button v-for="(tab, index) in tabs" :key="index" @click="id = tab.id"
+            :class="`text-left focus:outline-none hover:text-blue flex items-center py-3 px-2 hover:bg-lightblue rounded-full mr-auto mb-2 ${id === tab.id ? 'text-blue' : ''}`">
+            <router-link :to="`/${tab.link}`" class="flex">
             <i :class="`${tab.icon} text-2xl mr-4 text-left`"></i>
-            <p class="text-lg font-semibold text-left hidden lg:block"> {{ tab.title }} </p>
+            <p class="text-lg font-semibold text-left hidden xl:block"> {{ tab.title }} </p>
           </router-link>
         </button>
       </div>
       <button
-        class="text-white bg-blue rounded-full font-semibold focus:outline-none w-12 h-12 lg:h-auto lg:w-full p-3 hover:bg-darkblue">
-        <p class="hidden lg:block" @click="router.push(`/`)">Tweet</p>
-        <i class="fas fa-plus lg:hidden"></i>
+        class="text-white bg-blue rounded-full font-semibold focus:outline-none w-12 h-12 xl:h-auto xl:w-full p-3 hover:bg-darkblue">
+        <p class="hidden xl:block" @click="router.push(`/`)">Tweet</p>
+        <i class="fas fa-plus xl:hidden"></i>
       </button>
     </div>
   </div>
-  <div class="lg:w-full relative">
+  <div class="xl:w-full relative">
     <button @click="dropdown = !dropdown"
-      class="flex items-center w-full hover:bg-lightblue rounded-full p-2 focus:outline-none">
+      class="flex items-center xl:w-full hover:bg-lightblue rounded-full p-2 focus:outline-none">
       <img :src="profileImg" class="w-10 h-10 rounded-full border border-lighter" />
-      <div class="hidden lg:block ml-4">
+      <div class="hidden xl:block ml-4">
         <p class="text-sm font-bold leading-tight"> {{ name }}</p>
         <p class="text-sm leading-tight"> @{{ username }} </p>
       </div>
-      <i class="hidden lg:block fas fa-angle-down ml-auto text-lg"></i>
+      <i class="hidden xl:block fas fa-angle-down ml-auto text-lg"></i>
     </button>
 
     <div v-if="dropdown === true"
-      class="absolute bottom-0 left-0 w-64 rounded-lg shadow-md border-lightest bg-white mb-16">
+      class="absolute bottom-0 left-0 w-64 rounded-xl shadow-md border-lightest bg-white mb-16">
       <button @click="dropdown = false" class="p-3 flex items-center w-full hover:bg-lightest p-2 focus:outline-none">
         <img :src="profileImg" class="w-10 h-10 rounded-full border border-lighter" />
         <div class="ml-4">
@@ -84,7 +84,7 @@ export default {
         { icon: 'far fa-envelope', title: 'Messages', id: 'messages', link: "" },
         { icon: 'far fa-bookmark', title: 'Bookmarks', id: 'bookmarks', link: "" },
         { icon: 'fas fa-clipboard-list', title: 'Lists', id: 'lists', link: "" },
-        { icon: 'far fa-user', title: 'Profile', id: 'profile', link: "profile" },
+        { icon: 'far fa-user', title: 'Profile', id: 'profile', link: sessionStorage.getItem("username") },
         { icon: 'fas fa-ellipsis-h', title: 'More', id: 'more', link: "" }
       ],
     }

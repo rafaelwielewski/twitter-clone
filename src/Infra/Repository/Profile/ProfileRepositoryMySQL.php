@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infra\Repository;
+namespace App\Infra\Repository\Profile;
 
 use App\Domain\Contract\ProfileRepositoryContract;
 use App\Domain\Entity\User;

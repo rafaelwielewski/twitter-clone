@@ -16,9 +16,9 @@ const router = createRouter({
          component: () => import('../views/HomeView.vue')
        },
        {
-        path: '/',
-        name: 'home',
-        component: () => import('../views/HomeView.vue')
+        path: '/:id2/status/:id',
+        name: 'Reply',
+        component: () => import('../Views/TweetDialogView.vue')
       },
 
        {

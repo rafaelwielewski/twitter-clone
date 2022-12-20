@@ -8,8 +8,11 @@
         <nav class="sticky top-0 z-10">
           <NavBar />
         </nav>
-        <div class="">
-
+        <div class=" p-3">
+          <p class="text-lg font-bold">Suggested for you</p>
+        </div>
+        <div class="" v-for="(profile, index) in profiles" :key="index">
+          <Suggested :sendProfiles=profile />
         </div>
       </div>
       <div class="md:block hidden w-1/3 h-full border-l border-lighter py-2 px-6 relative">
@@ -21,6 +24,7 @@
 
 <script setup>
 
+import Suggested from '@/components/Suggested/Suggested.vue';
 import Sidebar from '@/components/Sidebar.vue';
 import Trending from '@/components/trending.vue';
 import NavBar from '@/components/NavBar.vue';
@@ -42,11 +46,13 @@ export default {
 
     return {
       suggested: "",
+      profiles: '',
     }
   },
 
   created: function () {
     this.checkLogin()
+    this.ShowProfiles()
 
   },
 
@@ -56,19 +62,19 @@ export default {
         this.$router.push({ path: '/login' });
       }
     },
-    async getSuggested() {
 
+    async ShowProfiles() {
       try {
-        const { data } = await http.get("/get-suggested", {
+        const { data } = await http.post("/get-showprofiles", {
+          username: sessionStorage.getItem("username"),
         });
-
-        this.suggested = data
-        console.log(data);
+        this.profiles = data
 
       } catch (error) {
         console.log(error);
       }
     },
+
   },
 }
 
