@@ -1,8 +1,6 @@
 # 🐦 Twitter Clone
 
-    Twitter Clone developed using Vue 3 + Vite + TailwindCSS + PHP + MySQL
-
-![My twitter screen shot](./src/res/site/img/TwitterClone.png)
+Twitter Clone developed using Vue 3 + Vite + TailwindCSS + PHP + MySQL
 
 # 💻 Techs
 
@@ -60,3 +58,8 @@ Run the project:
 ```bash
 npm run dev
 ```
+
+## UI
+
+![My twitter screen shot](./src/res/site/img/TwitterClone.png)
+
