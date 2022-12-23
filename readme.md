@@ -2,6 +2,8 @@
 
     Twitter Clone developed using Vue 3 + Vite + TailwindCSS + PHP + MySQL
 
+![My twitter screen shot](./src/res/site/img/TwitterClone.png)
+
 # 💻 Techs
 
 - Clean Architecture
@@ -13,7 +15,7 @@
 - Slim
 - Vue 3
 - Vite 2.0
-- Vuex 4)
+- Vuex 4
 - Vue Router 4
 - Axios
 - TailwindCSS
