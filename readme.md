@@ -1,18 +1,24 @@
+# 🐦 Twitter Clone
+
+    Twitter Clone developed using Vue 3 + Vite + TailwindCSS + PHP + MySQL
+
 # 💻 Techs
 
 - Clean Architecture
 - Authentication using JWT
 - API REST
-- [Amazon Web Service S3](https://aws.amazon.com/s3/)
-- [Vue 3](https://v3.vuejs.org/)
+- Backend with PHP
+- MySQL
+- Automated Tests using PHPUnit
+- Slim
+- [Vue 3]
 - [Vite 2.0](https://vitejs.dev/)
 - [Vuex 4](https://next.vuex.vuejs.org)
 - [Vue Router 4](https://next.router.vuejs.org)
+- Axios
 - [TailwindCSS](http://tailwindcs.com/)
 
 # ✨ Features
-
-> NOTE: Not all features from twitter are implemented because of how big Twitter is, Only the main features are implemented atm
 
 - Register and login
 - Create Tweets (Text and Images)
@@ -25,3 +31,30 @@
 - View following users and followers (missing)
 - Profile Pages
 - Edit Profile image and details (missing)
+
+# ▶️ Demo
+
+[View Demo]()
+
+# 💾 How to run locally
+
+## Backend
+
+ On main folder run:
+
+```bash
+composer install
+```
+
+## Frontend
+
+On Frontend/Twitter-clean-code run:
+
+```bash
+npm install
+```
+
+Run the project
+```bash
+npm run dev
+```
