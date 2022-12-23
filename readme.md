@@ -11,12 +11,12 @@
 - MySQL
 - Automated Tests using PHPUnit
 - Slim
-- [Vue 3]
-- [Vite 2.0](https://vitejs.dev/)
-- [Vuex 4](https://next.vuex.vuejs.org)
-- [Vue Router 4](https://next.router.vuejs.org)
+- Vue 3
+- Vite 2.0
+- Vuex 4)
+- Vue Router 4
 - Axios
-- [TailwindCSS](http://tailwindcs.com/)
+- TailwindCSS
 
 # ✨ Features
 
@@ -54,7 +54,7 @@ On Frontend/Twitter-clean-code run:
 npm install
 ```
 
-Run the project
+Run the project:
 ```bash
 npm run dev
 ```
