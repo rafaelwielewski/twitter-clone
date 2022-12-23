@@ -18,6 +18,7 @@ class PostTweet {
     {
         $tweet = new Tweet();
         $tweet->setTweetText($input->text);
+        $tweet->setTweetImg($input->img);
         $tweet->setTweetIduser(new Iduser($input->iduser));
         $tweet->setTweetName(new Name($input->name));
         $tweet->setTweetUsername(new Username ($input->username));

@@ -14,7 +14,7 @@
         </button>
       </div>
       <button
-        class="text-white bg-blue rounded-full font-semibold focus:outline-none w-12 h-12 xl:h-auto xl:w-full p-3 hover:bg-darkblue">
+        class="text-white bg-blue rounded-full font-semibold focus:outline-none w-12 h-12 xl:h-auto xl:w-56 py-3 mr-5 hover:bg-darkblue">
         <p class="hidden xl:block" @click="router.push(`/`)">Tweet</p>
         <i class="fas fa-plus xl:hidden"></i>
       </button>

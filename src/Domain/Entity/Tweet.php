@@ -10,6 +10,7 @@ use DomainException;
 class Tweet {
     
     private string $tweetText;
+    private $tweetImg;
     private string $tweetId;
     private Iduser $tweetIduser;
     private Name $tweetName;
@@ -71,6 +72,15 @@ class Tweet {
 
 	public function getTweetName(): string {
 		return $this->tweetName->getName();
+	}
+
+	public function getTweetImg() {
+		return $this->tweetImg;
+	}
+
+	public function setTweetImg($tweetImg): self {
+		$this->tweetImg = $tweetImg;
+		return $this;
 	}
 }
 

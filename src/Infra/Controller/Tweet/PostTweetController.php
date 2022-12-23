@@ -16,12 +16,15 @@ class PostTweetController implements Controller {
 
     public function handle(HttpRequest $httpRequest): HttpResponse
     {
+        
 
         $input = new PostTweetInput();
-        $input->text = $httpRequest->body['text'];
-        $input->iduser = $httpRequest->body['iduser'];
-        $input->name = $httpRequest->body['name'];
-        $input->username = $httpRequest->body['username'];
+
+        $input->img = $_FILES;
+        $input->text = $_POST['text'];
+        $input->iduser = $_POST['iduser'];
+        $input->name = $_POST['name'];
+        $input->username = $_POST['username'];
 
         $output = $this->postTweetUsecase->execute($input);
         return new HttpResponse(HttpResponse::HTTP_SUCCESS_CODE, $output);
