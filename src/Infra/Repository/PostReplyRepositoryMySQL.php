@@ -22,6 +22,8 @@ class PostReplyRepositoryMySQL implements PostReplyRepositoryContract {
             'date' => $reply->getDate()
         ]);
 
+        $lastInsertedId = $this->db->getLastInsertedId();
+
         $sql = 'SELECT COUNT(desreply) AS nrtotal FROM tb_replies WHERE idtweet = (:idtweet)';
         $result = $this->db->findAll($sql, [
             'idtweet' => $reply->getTweetId(),
@@ -35,6 +37,72 @@ class PostReplyRepositoryMySQL implements PostReplyRepositoryContract {
                 ":total"=>$total,
             ]);
 
+
+            if (count($reply->getTweetImg()) > 0) {
+
+
+                $img = $reply->getTweetImg();
+    
+                
+                $extension = explode('.', $img["file"]['name']);
+                $extension = end($extension);
+    
+                if ($extension === 'jpg') {
+    
+                    $image = imagecreatefromjpeg($img["file"]["tmp_name"]);
+                    $extensionfinal = ".jpg";
+    
+                } elseif ($extension === 'jpeg') {
+    
+                    $image = imagecreatefromjpeg($img["file"]["tmp_name"]);
+                    $extensionfinal = ".jpg";
+    
+                } elseif ($extension === 'png') {
+    
+                    $image = imagecreatefrompng($img["file"]["tmp_name"]);
+                    $extensionfinal = ".jpg";
+    
+                } elseif ($extension === 'gif') {
+                    $image = $img["file"]["tmp_name"];
+                    $extensionfinal = ".gif";
+    
+                }
+    
+                $dist = dirname( $_SERVER['DOCUMENT_ROOT'], 1 ) . DIRECTORY_SEPARATOR .
+                    "Frontend" . DIRECTORY_SEPARATOR .
+                    "Twitter-clean-code" . DIRECTORY_SEPARATOR .  
+                    "res" . DIRECTORY_SEPARATOR . 
+                    "site" . DIRECTORY_SEPARATOR . 
+                    "img" . DIRECTORY_SEPARATOR . 
+                    "reply" . DIRECTORY_SEPARATOR . 
+                    $lastInsertedId . $extensionfinal;
+    
+                if ($extensionfinal === '.jpg') {
+                    
+                    imagejpeg($image, $dist);
+    
+                    imagedestroy($image);
+    
+                } elseif ($extensionfinal === '.gif') {
+    
+                    move_uploaded_file($image, $dist);
+                    
+                }
+    
+                $url = "res" . DIRECTORY_SEPARATOR . 
+                "site" . DIRECTORY_SEPARATOR . 
+                "img" . DIRECTORY_SEPARATOR . 
+                "reply" . DIRECTORY_SEPARATOR . 
+                $lastInsertedId . $extensionfinal;
+    
+                $sql = 'UPDATE tb_replies SET fileurl = :fileurl  WHERE idreply = :idreply';
+                    $this->db->execute($sql, [
+                        'fileurl' => $url,
+                        'idreply' => $lastInsertedId,
+                    ]);
+    
+    
+            }
             return $total;
         
     }

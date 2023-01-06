@@ -16,6 +16,7 @@ class PostReply {
     public function execute(PostReplyInput $input) 
     {
         $reply = new Tweet();
+        $reply->setTweetImg($input->img);
         $reply->setTweetText($input->text);
         $reply->setTweetId($input->idtweet);
         $reply->setTweetIduser(new Iduser($input->iduser));

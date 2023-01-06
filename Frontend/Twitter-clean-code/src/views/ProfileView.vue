@@ -1,15 +1,15 @@
 <template>
-  <main>
-    <div id="profileview" class="flex container h-screen w-full ">
-      <div class="lg:w-1/5 border-r border-lighter px-2 lg:px-6 py-2 flex flex-col justify-between">
+  <main :key="$route.fullPath">
+    <div id="profileview" class="flex md:container h-screen w-full overflow-y-scroll">
+      <div class="xl:w-1/5 border-r border-lighter dark:border-dark px-0 lg:px-6 py-2 flex flex-col justify-between h-screen sticky top-0 overflow-y-auto no-scrollbar">
         <Sidebar />
       </div>
-      <div class="w-full md:w-1/2 h-full overflow-y-scroll">
+      <div class="w-full xl:w-1/2 h-full">
         <div class="">
           <Profile />
         </div>
       </div>
-      <div class="md:block hidden w-1/3 h-full border-l border-lighter py-2 px-6 relative">
+      <div class="lg:block hidden w-1/3 border-l border-lighter dark:border-dark py-2 px-6 relative h-screen sticky top-0 overflow-y-auto no-scrollbar">
         <Trending />
       </div>
     </div>

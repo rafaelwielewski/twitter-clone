@@ -47,8 +47,8 @@ class LikeReplyRepositoryMySQL implements LikeRepositoryContract {
             return $total2;
 
         }else {
-          
-            $sql = 'DELETE FROM tb_replies WHERE (idreply, iduser) = (:idreply, :iduser)';
+
+            $sql = 'DELETE FROM tb_likesreply WHERE (idreply, iduser) = (:idreply, :iduser)';
                 $this->db->execute($sql, [
                 'idreply' => $like->getTweetId(),
                 'iduser' => $like->getTweetIduser(),

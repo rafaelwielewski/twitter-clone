@@ -18,16 +18,9 @@ export default defineComponent({
     :width="size"
     :height="size"
     viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    fill="currentColor"
     class="feather feather-hash"
   >
-    <line x1="4" y1="9" x2="20" y2="9"></line>
-    <line x1="4" y1="15" x2="20" y2="15"></line>
-    <line x1="10" y1="3" x2="8" y2="21"></line>
-    <line x1="16" y1="3" x2="14" y2="21"></line>
+  <path d="M10.09 3.098L9.72 7h5.99l.39-4.089 1.99.187L17.72 7h3.78v2h-3.97l-.56 6h3.53v2h-3.72l-.38 4.089-1.99-.187.36-3.902H8.78l-.38 4.089-1.99-.187L6.77 17H2.5v-2h4.46l.56-6H3.5V7h4.21l.39-4.089 1.99.187zM14.96 15l.56-6H9.53l-.56 6h5.99z"></path>
   </svg>
 </template>

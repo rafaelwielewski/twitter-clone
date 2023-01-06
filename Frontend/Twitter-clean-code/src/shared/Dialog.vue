@@ -98,7 +98,6 @@ export default defineComponent({
             <div
               class="
                 inline-block
-                w-full
                 p-6
                 my-8
                 overflow-hidden
@@ -106,7 +105,7 @@ export default defineComponent({
                 align-middle
                 transition-all
                 transform
-                bg-white
+                bg-whitest
                 dark:bg-black
                 shadow-xl
                 rounded-2xl

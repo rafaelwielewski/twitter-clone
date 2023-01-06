@@ -6,6 +6,7 @@ use App\Application\UseCase\ProfileImg\ProfileImg;
 use App\Infra\Controller\Controller;
 use App\Infra\Controller\Handler;
 use App\Infra\Controller\ProfileImg\ProfileImgController;
+use App\Infra\Database\MySQL;
 use App\Infra\Factory\Contract\ControllerFactoryContract;
 use App\Infra\Repository\ProfileImgRepository;
 
@@ -18,10 +19,10 @@ class ProfileImgFactory implements ControllerFactoryContract {
     {
         return new Handler(
             new ProfileImgController(
-                    //new ProfileImg(
-                new ProfileImgRepository()
+                new ProfileImg(
+                    new ProfileImgRepository(new MySQL)
             )
-        );
-        //);    
+            )
+        );  
     }
 }

@@ -1,28 +1,33 @@
 <template>
   <div id="CreateTweet">
-    <div class="px-5 py-3 border-b-8 border-lighter flex">
+    <div class="px-4 border-b-1 border-lighter dark:border-dark flex">
       <div class="flex-none">
-        <img :src="profileImg" class="flex-none w-12 h-12 rounded-full border border-lighter" />
+        <img :src="profileImg" class="flex-none w-12 h-12 mt-3 rounded-full border-1 border-lighter dark:border-black" />
       </div>
       <form v-on:submit.prevent="addTweet" class="w-full px-4 relative">
-        <textarea v-model="tweet.text" placeholder="What's up?" class="mt-3 pb-3 w-full focus:outline-none" />
+        <textarea @input="resize($event)" v-model="tweet.text" placeholder="What's Happening?" class="
+        text-xl mt-3 pb-3 w-full breakwords border-none resize-none	
+        focus:ring-0
+        dark:text-lightest dark:bg-black
+        ">
+      </textarea>
         <img
             v-if="tweetImgPreview"
             :src="tweetImgPreview"
             class="object-cover w-full h-96 rounded-lg"
           />
-        <div class="flex items-center">
+        <div class="flex items-center pb-4">
           <button @click.prevent="tweetAttachmentInput.click" type="button" class="text-lg text-blue mr-4 far fa-image">
           </button>
           <input class="hidden" ref="tweetAttachmentInput" type="file" id="file" v-on:change="onChangeFileUpload()" />
           <button type="button" class="text-lg text-blue mr-4 fas fa-film"></button>
           <button type="button" class="text-lg text-blue mr-4 far fa-chart-bar"></button>
           <button type="button" class="text-lg text-blue mr-4 far fa-smile"></button>
-        </div>
-        <button type="submit"
-          class="h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full absolute bottom-0 right-0">
+          <button type="submit"
+          class="h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full absolute right-0">
           Tweet
         </button>
+        </div>
       </form>
     </div>
   </div>
@@ -30,6 +35,7 @@
   
 <script setup>
 
+import ResizeTextArea from '@/utils/resizetextarea.vue'
 import http from '../../services/http'
 import { defineComponent, ref, computed } from 'vue'
 
@@ -50,7 +56,8 @@ export default {
 
   data() {
     return {
-
+      placeholder: "This is a test message",
+      textValue: "reSize",
       tweetImgPreview: '',
       iduser: sessionStorage.getItem("iduser"),
       name: sessionStorage.getItem("name"),
@@ -62,6 +69,13 @@ export default {
   },
 
   methods: {
+
+    resize (e) {
+
+      e.target.style.height = 'auto'
+      e.target.style.height = `${e.target.scrollHeight}px`
+
+    },
 
     async onChangeFileUpload() {
 
@@ -93,7 +107,7 @@ export default {
         this.tweet.text = '';
         this.tweetImgPreview =  '',
         this.$emit("refresh")
-        console.log(data);
+
 
       } catch (error) {
         console.log(error);

@@ -3,48 +3,47 @@
 namespace App\Infra\Repository;
 
 use App\Domain\Contract\ProfileImgRepositoryContract;
-
+use App\Domain\Entity\User;
+use App\Infra\Database\DB;
 
 class ProfileImgRepository implements ProfileImgRepositoryContract {
 
-    public function __construct()
-    {
-		
-	}
+    public function __construct(private DB $db)
+    {}
 
-public function setPhoto()
-{
-	var_dump($_FILES);
-	$extension = explode('.', $_FILES["file"]['name']);
-	$extension = end($extension);
+	public function setPhoto(User $profile)
+	{
 
-	switch ($extension) {
+	$profileImg = $profile->getProfileImg();
+	$profileIduser = $profile->getIduser();
 
-		case "jpg":
-		case "jpeg":
-		$image = imagecreatefromjpeg($_FILES["file"]["tmp_name"]);
-		break;
 
-		case "gif":
-		$image = imagecreatefromgif($_FILES["file"]["tmp_name"]);
-		break;
+	$image = imagecreatefrompng($profileImg["tmp_name"]);
 
-		case "png":
-		$image = imagecreatefrompng($_FILES["file"]["tmp_name"]);
-		break;
-
-	}
-
-	$dist = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
-		"res" . DIRECTORY_SEPARATOR . 
-		"site" . DIRECTORY_SEPARATOR . 
-		"img" . DIRECTORY_SEPARATOR . 
-		"profile" . DIRECTORY_SEPARATOR . 
-		$_POST['username'] . ".jpg";
+	$dist = dirname( $_SERVER['DOCUMENT_ROOT'], 1 ) . DIRECTORY_SEPARATOR .
+	"Frontend" . DIRECTORY_SEPARATOR .
+	"Twitter-clean-code" . DIRECTORY_SEPARATOR .  
+	"res" . DIRECTORY_SEPARATOR . 
+	"site" . DIRECTORY_SEPARATOR . 
+	"img" . DIRECTORY_SEPARATOR . 
+	"profile" . DIRECTORY_SEPARATOR . 
+	$profileIduser . ".jpg";
 
 	imagejpeg($image, $dist);
 
 	imagedestroy($image);
+
+	$url = "res" . DIRECTORY_SEPARATOR . 
+	"site" . DIRECTORY_SEPARATOR . 
+	"img" . DIRECTORY_SEPARATOR . 
+	"profile" . DIRECTORY_SEPARATOR . 
+	$profileIduser . ".jpg";
+
+	$sql = 'UPDATE tb_users SET profileImg = :fileurl  WHERE iduser = :profileIduser';
+		$this->db->execute($sql, [
+			'fileurl' => $url,
+			'profileIduser' => $profileIduser,
+		]);
 
 }
 }

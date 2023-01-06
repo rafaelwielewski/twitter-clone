@@ -1,6 +1,13 @@
 <template>
 
-  <main class="
+<EditProfile
+    :profileEdit="profile"
+    :profileImg="profile.profileImg"
+    :show="showEditProfile"
+    @close="close()"
+    @dispatch="updateProfile"
+  />
+  <main :key="cacheKey" class="
       w-full
       h-full
       border-r border-lighter
@@ -9,7 +16,8 @@
     " ref="scrollRef">
     <div class="
         sticky top-0 z-10
-        bg-white
+        dark:bg-black
+        bg-whitest
         px-5
         py-3
         border-b border-lighter
@@ -43,11 +51,11 @@
           dark:border-black
           bg-black
         ">
-        <img :src="profile.profileImg" class="w-28 h-28 md:w-32 md:h-32" />
+        <img :src="`${profile.profileImg}?cache=${cacheKey}`" class="w-28 h-28 md:w-32 md:h-32" />
       </div>
     </div>
     <div class="mt-5 px-6">
-      <button v-show="isCurrentUser" @click="showEditProfileDialog = true" class="
+      <button v-show="isCurrentUser" @click="showEditProfile = true" class="
           float-right
           text-blue
           font-bold
@@ -183,6 +191,7 @@
       <div class="
           w-full
           py-4
+          dark:text-lightest
           text-center
           hover:bg-blue hover:bg-opacity-10
           hover:text-blue
@@ -230,7 +239,9 @@
       </div>
     </div>
     <div class="flex flex-col">
-        <Tweet  :sendTweet=tweets />
+      <div v-for="(sendTweet, index) in tweets" :key="index">
+        <Tweet :sendTweet=sendTweet />
+      </div>
       <div class="
           w-full
           p-4
@@ -261,6 +272,7 @@ import LoadingSpinner from '../../shared/LoadingSpinner.vue'
 import Return from '../../shared/Return.vue'
 import NavBar from '@/components/NavBar.vue';
 import Tweet from '@/components/Tweet/Tweet.vue';
+import EditProfile from '@/components/Profile/EditProfile.vue';
 
 const router = useRouter();
 
@@ -274,10 +286,13 @@ export default {
     Return,
     IconEllipsisH,
     LoadingSpinner,
+    EditProfile,
   },
 
   data() {
     return {
+      cacheKey: 1,
+      showEditProfile: false,
       username: this.$route.params.id,
       profile: '',
       tweets:'',
@@ -295,6 +310,18 @@ export default {
   },
 
   methods: {
+
+    forceRerender() {
+      const nowTime = +new Date()
+      this.cacheKey = nowTime
+    },
+    
+    close(){
+
+      this.showEditProfile = false;
+      this.forceRerender();
+
+    },
     async checkLogin() {
       if (sessionStorage.getItem("loggedin") === null) {
         this.$router.push({ path: '/' });

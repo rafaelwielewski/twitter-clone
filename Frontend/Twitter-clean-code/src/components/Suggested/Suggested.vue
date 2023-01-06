@@ -1,12 +1,12 @@
 <template>
-    <button class="w-full flex text-left hover:bg-lighter p-3 border-t border-lighter" @click="router.push(sendProfiles.deslogin)">
-      <img :src="sendProfiles.profileImg" class="w-14 h-14 rounded-full border border-lighter" />
+    <button class="w-full flex text-left hover:bg-lighter dark:hover:bg-dark p-3" @click="router.push(`/${sendProfiles.deslogin}`)">
+      <img :src="sendProfiles.profileImg" class="w-14 h-14 rounded-full" />
       <div class="hidden lg:block ml-4">
-        <p class="text-base font-bold leading-tight"> {{ sendProfiles.desname }} </p>
-        <p class="text-base leading-tight"> @{{ sendProfiles.deslogin }} </p>
-        <p class="text-base leading-tight py-1"> {{ sendProfiles.bio }} </p>
+        <p class="dark:text-lightest text-base font-bold leading-tight"> {{ sendProfiles.desname }} </p>
+        <p class="dark:text-light text-base leading-tight"> @{{ sendProfiles.deslogin }} </p>
+        <p class="dark:text-lightest text-base leading-tight py-1"> {{ sendProfiles.bio }} </p>
       </div>
-      <button v-show="!isFollowing" @click="follow" class="
+      <button v-show="!isFollowing" @click.stop="follow" class="
           ml-auto
           float-right
           text-blue
@@ -23,7 +23,7 @@
         ">
         Follow
       </button>
-      <button v-show="isFollowing" @click="unfollow" class="
+      <button v-show="isFollowing" @click.stop="unfollow" class="
           group
           ml-auto
           float-right

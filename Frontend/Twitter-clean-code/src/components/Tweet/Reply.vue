@@ -1,40 +1,44 @@
 <template>
   <div id="Reply">
     <div class="flex flex-col-reverse">
-      <div v-for="(reply, index) in sendReply" :key="index" class="w-full p-4 border hover:bg-lighter flex">
+      <div class="w-full p-4 border-b-1 border-lighter dark:border-dark hover:bg-lighter dark:hover:bg-darkest flex hover:cursor-pointer">
           <div class="flex-none mr-4">
-            <img :src="reply.profileImg" class="h-12 w-12 rounded-full flex-none" />
+            <img :src="`/${sendReply.profileImg}`" class="h-12 w-12 rounded-full flex-none hover:border-1.
+          " />
           </div>
           <div class="w-full">
-            <div class="flex items-center w-full">
-              <p class="font-semibold hover:underline"> {{ reply.desname }} </p>
-              <p class="text-sm text-dark ml-2 hover:underline"> @{{ reply.deslogin }} </p>
-              <p class="text-sm text-dark ml-2 hover:underline"> {{ reply.dtregister }} </p>
-              <button @click="router.push(`/${reply.deslogin}/status/${reply.idtweet}`)" class="fas fa-angle-down text-dark ml-auto"></button>
-            </div>
-            <p class="py-2">
-              {{ reply.desreply }}
+          <div class="flex items-center w-full cursor-pointer">
+            <p class="text-base dark:text-lightest font-semibold hover:underline" @click.stop="router.push(sendReply.deslogin)"> {{ sendReply.desname }}
             </p>
-            <div class="flex items-center justify-between w-full">
-              <div class="flex items-center text-sm text-dark">
-                <button @click="router.push(`/${reply.deslogin}/status/${reply.idreply}`)" class="far fa-comment mr-3"></button>
-                <p> {{ reply.desreplies }} </p>
-              </div>
-              <div class="flex items-center text-sm text-dark">
-                <button class="fas fa-retweet mr-3"></button>
-                <p> {{ reply.desretweets }} </p>
-              </div>
-              <div class="flex items-center text-sm text-dark">
-                <button class="likecount" @click="likeReply(reply.idreply, index)">
-                  <ToggleFavoriteReply :sendIdReply=reply.idreply :sendUserid=userid></ToggleFavoriteReply>
-                </button>
-                <p class="likecount2">{{ reply.deslikes }}</p>
-              </div>
-              <div class="flex items-center text-sm text-dark">
-                <button class="fas fa-share-square mr-3"></button>
-              </div>
+            <p class="text-base dark:text-gray ml-2 hover:underline" @click.stop="router.push(sendReply.deslogin)"> @{{ sendReply.deslogin
+            }} </p>
+            <p class="text-base dark:text-gray ml-2">·</p> 
+            <p class="text-sm ml-2 dark:text-gray hover:underline"> {{ parseTwitterDate() }}</p>
+            <button @click.stop=""
+              class="ml-auto py-1 px-2 dark:text-gray hover:text-blue hover:cursor-pointer hover:bg-blue dark:hover:text-blue hover:bg-opacity-20 rounded-full">
+              <IconEllipsisH :size="18" class="" />
+            </button>
+          </div>
+          <p class="py-2 text-base dark:text-lightest" v-html="`${tweetContent}`"></p>
+          <img v-if="sendReply.fileurl" :src="`/${sendReply.fileurl}`" class="object-cover w-full h-auto rounded-lg mb-2 border-1 dark:border-dark" />
+          <div class="flex items-center justify-between w-full ">
+            <div @click.stop="" class="flex items-center text-sm py-1 px-2.5 dark:text-gray hover:text-blue dark:hover:text-blue hover:cursor-pointer hover:bg-blue hover:bg-opacity-20 rounded-full">
+              <button class="far fa-comment mr-3"></button>
+              <p> {{ sendReply.desreplies }} </p>
+            </div>
+            <div @click.stop="" class="flex items-center text-sm py-1 px-2.5 dark:text-gray hover:text-green dark:hover:text-green hover:cursor-pointer hover:bg-green hover:bg-opacity-20 rounded-full">
+              <button class="fas fa-retweet mr-3"></button>
+              <p> {{ sendReply.desretweets }} </p>
+            </div>
+            <button @click.stop="" class="flex items-center text-sm py-1 px-2.5 dark:text-gray hover:text-danger dark:hover:text-danger hover:cursor-pointer hover:bg-danger hover:bg-opacity-20 rounded-full">
+                <ToggleFavoriteReply @click.stop="likeReply(sendReply.idreply)" :sendIdReply=sendReply.idreply :sendUserid=userid></ToggleFavoriteReply>
+              <p class="likecount2">{{ sendReply.deslikes }}</p>
+            </button>
+            <div class="flex items-center text-sm py-1 px-1 dark:text-gray hover:text-blue hover:cursor-pointer hover:bg-blue hover:bg-opacity-20 rounded-full">
+              <button class="fas fa-share-square mr-3"></button>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -42,10 +46,11 @@
   
 
 <script setup>
-
+import IconEllipsisH from '@/icons/IconEllipsisH.vue'
 import ToggleFavoriteReply from "@/components/like/ToggleFavoriteReply.vue";
 import { useRouter } from "vue-router";
 import http from '@/services/http';
+import { linkifyHTMLText } from '@/utils/linkify'
 
 const router = useRouter();
 
@@ -66,6 +71,7 @@ export default {
   data() {
     return {
       userid: sessionStorage.getItem("iduser"),
+      tweetContent: linkifyHTMLText(this.sendReply.desreply)
     }
   },
 
@@ -76,7 +82,7 @@ export default {
   methods: {
 
 
-    async likeReply($idreply, $index) {
+    async likeReply($idreply) {
 
       try {
         const { data } = await http.post("/post-likereply", {
@@ -84,11 +90,35 @@ export default {
           userid: this.userid,
 
         });
-        this.sendReply[$index].deslikes = data
+        console.log(data);
+        this.sendReply.deslikes = data
 
       } catch (error) {
         console.log(error);
       }
+    },
+
+    parseTwitterDate() {
+
+      let tdate = this.sendReply.dtregister
+      var longdate = new Date(tdate).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"}) 
+      var systemDate = new Date(Date.parse(tdate));
+      var userDate = new Date();
+      var diff = Math.floor((userDate - systemDate) / 1000);
+      if (diff <= 1) { return 'just now'; }
+      if (diff < 20) { return diff + ' seconds ago'; }
+      if (diff < 40) { return 'half a minute ago'; }
+      if (diff < 60) { return 'less than a minute ago'; }
+      if (diff <= 90) { return 'one minute ago'; }
+      if (diff <= 3540) { return Math.round(diff / 60) + ' minutes ago'; }
+      if (diff <= 5400) { return '1 hour ago'; }
+      if (diff <= 86400) { return Math.round(diff / 3600) + ' hours ago'; }
+      if (diff <= 129600) { return '1 day ago'; }
+      if (diff < 604800) { return Math.round(diff / 86400) + ' days ago'; }
+      if (diff <= 777600) { return '1 week ago'; }
+      return  longdate;
+      
+      
     },
   }
 }

@@ -11,18 +11,21 @@ class GetProfileImgRepository implements GetProfileImgRepositoryContract {
 		
 	}
 
-    public function checkPhoto($username)
+    public function checkPhoto($profileIduser)
 {
 	if (file_exists(
-		$_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
+		$_SERVER['DOCUMENT_ROOT'], 1 ) . DIRECTORY_SEPARATOR .
+		"Frontend" . DIRECTORY_SEPARATOR .
+		"Twitter-clean-code" . DIRECTORY_SEPARATOR .  
 		"res" . DIRECTORY_SEPARATOR . 
 		"site" . DIRECTORY_SEPARATOR . 
 		"img" . DIRECTORY_SEPARATOR . 
 		"profile" . DIRECTORY_SEPARATOR . 
-        $username . ".jpg"
-		)) {
+		$profileIduser . ".jpg"
+		
+		) {
 
-        return $file = "/res/site/img/profile/" . $username . ".jpg";
+        return $file = "/res/site/img/profile/" . $profileIduser . ".jpg";
 		
 	} else {
 

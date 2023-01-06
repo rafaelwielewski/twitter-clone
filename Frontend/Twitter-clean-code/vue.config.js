@@ -1,4 +1,9 @@
 module.exports = {
+  configureWebpack: {
+    plugins: [
+      new MyAwesomeWebpackPlugin()
+    ]
+  },
   css: {
     loaderOptions: {
       sass: {

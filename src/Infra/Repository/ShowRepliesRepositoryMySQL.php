@@ -13,7 +13,7 @@ class ShowRepliesRepositoryMySQL implements ShowRepliesRepositoryContract {
 
     public function ShowReplies(Tweet $idtweet)
     {
-        $sql = 'SELECT a.*, b.profileImg, b.desname, b.deslogin FROM `tb_replies` a INNER JOIN  `tb_users` b ON a.iduser = b.iduser WHERE a.idtweet = :idtweet';
+        $sql = 'SELECT a.*, b.profileImg, b.desname, b.deslogin FROM `tb_replies` a INNER JOIN  `tb_users` b ON a.iduser = b.iduser WHERE a.idtweet = :idtweet ORDER BY a.dtregister DESC';
         $results = $this->db->findAll($sql, [
             'idtweet' => $idtweet->getTweetId(),
         ]);

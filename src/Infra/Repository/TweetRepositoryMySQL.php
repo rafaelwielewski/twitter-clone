@@ -32,23 +32,28 @@ class TweetRepositoryMySQL implements TweetRepositoryContract {
 
             $img = $tweet->getTweetImg();
 
+            
             $extension = explode('.', $img["file"]['name']);
             $extension = end($extension);
 
-            switch ($extension) {
+            if ($extension === 'jpg') {
 
-            	case "jpg":
-            	case "jpeg":
-            	$image = imagecreatefromjpeg($img["file"]["tmp_name"]);
-            	break;
+                $image = imagecreatefromjpeg($img["file"]["tmp_name"]);
+                $extensionfinal = ".jpg";
 
-            	case "gif":
-            	$image = imagecreatefromgif($img["file"]["tmp_name"]);
-            	break;
+            } elseif ($extension === 'jpeg') {
 
-            	case "png":
-            	$image = imagecreatefrompng($img["file"]["tmp_name"]);
-            	break;
+                $image = imagecreatefromjpeg($img["file"]["tmp_name"]);
+                $extensionfinal = ".jpg";
+
+            } elseif ($extension === 'png') {
+
+                $image = imagecreatefrompng($img["file"]["tmp_name"]);
+                $extensionfinal = ".jpg";
+
+            } elseif ($extension === 'gif') {
+                $image = $img["file"]["tmp_name"];
+                $extensionfinal = ".gif";
 
             }
 
@@ -59,17 +64,25 @@ class TweetRepositoryMySQL implements TweetRepositoryContract {
             	"site" . DIRECTORY_SEPARATOR . 
             	"img" . DIRECTORY_SEPARATOR . 
             	"tweet" . DIRECTORY_SEPARATOR . 
-            	$lastInsertedId . ".jpg";
-            var_dump($dist);
-            imagejpeg($image, $dist);
+            	$lastInsertedId . $extensionfinal;
 
-            imagedestroy($image);
+            if ($extensionfinal === '.jpg') {
+                
+                imagejpeg($image, $dist);
+
+                imagedestroy($image);
+
+            } elseif ($extensionfinal === '.gif') {
+
+                move_uploaded_file($image, $dist);
+                
+            }
 
             $url = "res" . DIRECTORY_SEPARATOR . 
             "site" . DIRECTORY_SEPARATOR . 
             "img" . DIRECTORY_SEPARATOR . 
             "tweet" . DIRECTORY_SEPARATOR . 
-            $lastInsertedId . ".jpg";
+            $lastInsertedId . $extensionfinal;
 
             $sql = 'UPDATE tb_tweets SET fileurl = :fileurl  WHERE idtweet = :idtweet';
                 $this->db->execute($sql, [

@@ -1,12 +1,12 @@
 <template>
-    <div class="flex justify-center container mx-auto h-screen w-1/4 px-4 lg:px-0 py-8 bg-white">
+    <div class="flex justify-center container mx-auto h-screen w-1/4 px-2 lg:px-0 py-8 dark:bg-black bg-whitest">
         <div>
             <IconTwitter :size="30" class="w-full text-blue" />
             <h1 class="pt-12 text-4xl dark:text-lightest font-bold">
                 Log in to Twitter
             </h1>
             <form @submit.prevent="login()" class="w-full text-center">
-                <input v-model="input.username" type="text" placeholder="Username" class="
+                <input v-model="inputLogin.username" type="text" placeholder="Username" class="
             w-full
             px-2
             py-2
@@ -23,7 +23,7 @@
             transition-colors
             duration-75
           " />
-                <input v-model="input.password" type="password" placeholder="Password" class="
+                <input v-model="inputLogin.password" type="password" placeholder="Password" class="
             w-full
             px-2
             py-2
@@ -50,7 +50,7 @@
                     <span v-else class="text-lightest text-lg font-semibold">Log in</span>
                 </button>
                 <button class="p-4">
-                    <router-link to="/">
+                    <router-link to="/register">
                         <span class="text-blue hover:underline">Sign up for Twitter</span>
                     </router-link>
                 </button>
@@ -78,13 +78,10 @@ export default defineComponent({
             errors: {
                 login: '',
             },
-            input: {
+            inputLogin: {
                 username: "rafael",
                 password: "Rafa12345",
             },
-            registerName: "",
-            registerUsername: "",
-            registerPassword: "",
             profileImg: '',
 
         }
@@ -104,28 +101,28 @@ export default defineComponent({
             }
         },
 
-        async getProfileImg() {
+        // async getProfileImg() {
 
-            try {
-                const { data } = await http.post("/get-profileimg", {
-                    username: sessionStorage.getItem('username'),
-                });
+        //     try {
+        //         const { data } = await http.post("/get-profileimg", {
+        //             username: sessionStorage.getItem('username'),
+        //         });
 
-                sessionStorage.setItem('profileImg', data);
+        //         sessionStorage.setItem('profileImg', data);
 
-                this.profileImg = data;
+        //         this.profileImg = data;
 
-            } catch (error) {
-                console.log(error);
-            }
-        },
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // },
 
         async login() {
 
             try {
                 const { data } = await http.post("/post-login", {
-                    username: this.input.username,
-                    password: this.input.password,
+                    username: this.inputLogin.username,
+                    password: this.inputLogin.password,
                 });
 
                 console.log(data);
@@ -136,37 +133,18 @@ export default defineComponent({
                     sessionStorage.setItem('name', data.name);
                     sessionStorage.setItem('username', data.username);
                     sessionStorage.setItem('password', data.password);
+                    sessionStorage.setItem('profileImg', data.profileImg);
 
                     console.log(sessionStorage);
-                    this.getProfileImg()
+
                     this.$router.push({ path: "/" });
                 }
                 if (data === 'Your username or password is incorrect') {
                     this.errors.login = 'Your username or password is incorrect';
-                    this.username = '';
-                    this.password = '';
+                    this.inputLogin.username = '';
+                    this.inputLogin.password = '';
                 }
 
-
-            } catch (error) {
-                console.log(error);
-            }
-        },
-
-        async register() {
-
-            try {
-                const { data } = await http.post("/post-register", {
-                    name: this.registerName,
-                    username: this.registerUsername,
-                    password: this.registerPassword,
-                });
-                console.log(data);
-                if (data === 'Registered') {
-                    this.username = this.registerUsername;
-                    this.password = this.registerPassword;
-                    this.login();
-                };
 
             } catch (error) {
                 console.log(error);

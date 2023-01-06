@@ -1,12 +1,12 @@
 <template>
   <div id="CreateReply">
-    <div class="px-5 py-3 border-b border-lighter flex" v-for="(tweet, index) in sendTweet" :key="index">
+    <div class="px-5 py-3 border-b border-lighter flex">
       <div class="flex-none py-4">
-        <img :src="profileImg" class="flex-none w-12 h-12 rounded-full border border-lighter" />
+        <img :src="`/${profileImg}`" class="flex-none w-12 h-12 rounded-full border border-lighter" />
       </div>
-      <form v-on:submit.prevent="addReply(tweet.idtweet)" class="w-full px-4 relative">
+      <form v-on:submit.prevent="addReply(sendTweet.idtweet)" class="w-full px-4 relative">
         <span> Replying to </span>
-        <button class="font-semibold text-blue"> @{{ tweet.deslogin }} </button>
+        <button class="font-semibold text-blue"> @{{ sendTweet.deslogin }} </button>
         <textarea v-model="reply.text" placeholder="Tweet your reply" class="mt-3 pb-3 w-full focus:outline-none" />
         <div class="flex items-center">
           <button class="text-lg text-blue mr-4 far fa-image"></button>

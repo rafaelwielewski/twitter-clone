@@ -30,6 +30,7 @@ class LoginRepositoryMySQL implements LoginRepositoryContract {
             $session['iduser'] = $results["iduser"];
             $session['name'] = $results["desname"];
 		    $session['username'] = $results["deslogin"];
+            $session['profileImg'] = $results["profileImg"];
             return ($session);
 
 	    } else {

@@ -18,9 +18,10 @@ class PostReplyController implements Controller {
     {
 
         $input = new PostReplyInput();
-        $input->text = $httpRequest->body['text'];
-        $input->iduser = $httpRequest->body['iduser'];
-        $input->idtweet = $httpRequest->body['idtweet'];
+        $input->img = $_FILES;
+        $input->text = $_POST['text'];
+        $input->iduser = $_POST['iduser'];
+        $input->idtweet = $_POST['idtweet'];
 
         $output = $this->PostReplyUsecase->execute($input);
         return new HttpResponse(HttpResponse::HTTP_SUCCESS_CODE, $output);
