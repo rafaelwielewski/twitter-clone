@@ -1,6 +1,6 @@
 # 🐦 Twitter Clone
 
-Twitter Clone developed using Vue 3 + Vite + TailwindCSS + PHP + MySQL
+Twitter Clone developed using Vuejs + PHP  Vite + TailwindCSS + MySQL
 
 # 💻 Techs
 
