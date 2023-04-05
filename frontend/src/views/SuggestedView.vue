@@ -1,7 +1,8 @@
 <template>
   <main>
     <div id="suggested" class="flex md:container h-screen w-full dark:bg-black overflow-y-scroll">
-      <div class="xl:w-1/5 border-r border-lighter dark:border-dark px-0 lg:px-6 py-2 flex flex-col justify-between h-screen sticky top-0 overflow-y-auto no-scrollbar">
+      <div
+        class="xl:w-1/5 border-r border-lighter dark:border-dark px-0 lg:px-6 py-2 flex flex-col justify-between h-screen sticky top-0 overflow-y-auto no-scrollbar">
         <Sidebar />
       </div>
       <div class="w-full md:w-1/2 h-full">
@@ -15,7 +16,8 @@
           <Suggested :sendProfiles=profile />
         </div>
       </div>
-      <div class="lg:block hidden w-1/3 border-l border-lighter dark:border-dark py-2 px-6 relative h-screen sticky top-0 overflow-y-auto no-scrollbar">
+      <div
+        class="lg:block hidden w-1/3 border-l border-lighter dark:border-dark py-2 px-6 relative h-screen sticky top-0 overflow-y-auto no-scrollbar">
         <Trending />
       </div>
     </div>
@@ -28,10 +30,8 @@ import Suggested from '@/components/Suggested/Suggested.vue';
 import Sidebar from '@/components/Sidebar.vue';
 import Trending from '@/components/trending.vue';
 import NavBar from '@/components/NavBar.vue';
-import { useRouter } from "vue-router";
 import http from '@/services/http';
 
-const router = useRouter();
 
 </script>
 
@@ -80,6 +80,4 @@ export default {
 
 </script>
 
-<style>
-
-</style>
+<style></style>
