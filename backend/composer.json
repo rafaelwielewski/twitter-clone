@@ -4,8 +4,8 @@
   "type": "project",
   "autoload": {
     "psr-4": {
-      "App\\": "src/",
-      "Mock\\": "test/mocks"
+      "App\\": "api/src/",
+      "Mock\\": "api/test/mocks"
     }
   },
   "authors": [
