@@ -28,7 +28,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Slim\Views\PhpRenderer;
 
-header("Access-Control-Allow-Origin: http://186.211.97.243:8081");
+header("Access-Control-Allow-Origin: http://187.85.146.112:8081");
 header("Access-Control-Allow-Headers: Content-Type");
 
 

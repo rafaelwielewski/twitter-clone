@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
 const axiosInstance = axios.create({
-    headers:{
-        "Content-type":"aplication/json"
-    },
-    baseURL:"http://186.211.97.243:8082"
+  headers: {
+    "Content-type": "aplication/json",
+  },
+  baseURL: "http://187.85.146.112:8082",
 });
 
 export default axiosInstance;
