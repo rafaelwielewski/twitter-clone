@@ -1,5 +1,5 @@
 <?php
-require './src/index.php';
+require '.api/src/index.php';
 
 
 ?>
