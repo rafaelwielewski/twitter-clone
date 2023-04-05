@@ -3,7 +3,7 @@
         'name' => 'thalyswolf/twitter-clean-code',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'f01bd080dab11c81ee44e7ad1c7fc8f3b2488500',
+        'reference' => '70f73b416281167e9c143b7a360fb582101ada03',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -556,7 +556,7 @@
         'thalyswolf/twitter-clean-code' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'f01bd080dab11c81ee44e7ad1c7fc8f3b2488500',
+            'reference' => '70f73b416281167e9c143b7a360fb582101ada03',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
