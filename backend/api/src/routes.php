@@ -28,7 +28,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Slim\Views\PhpRenderer;
 
-header("Access-Control-Allow-Origin: https://twitter-clone-rafaelwielewski.vercel.app");
+header("Access-Control-Allow-Origin: https://twitter-clone-rosy-eta.vercel.app");
 header("Access-Control-Allow-Headers: Content-Type");
 
 

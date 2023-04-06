@@ -20,6 +20,11 @@ const router = createRouter({
       name: "register",
       component: () => import("../views/Auth/RegisterView.vue"),
     },
+    {
+      path: "/:id2/status/:id",
+      name: "Reply",
+      component: () => import("../Views/TweetDialogView.vue"),
+    },
 
     {
       path: "/:id",
