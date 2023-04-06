@@ -23,11 +23,12 @@ class MySQL implements DB {
     {
         if (!$this->conn) {
             $host = $_ENV['MYSQL_HOST'];
+            $port = $_ENV['MYSQL_PORT'];
             $database = $_ENV['MYSQL_DATABASE'];
             $username = $_ENV['MYSQL_USER'];
             $password = $_ENV['MYSQL_PASSWORD'];
 
-            $this->conn = new PDO("mysql:host=$host;dbname=$database", $username, $password);
+            $this->conn = new PDO("mysql:host=$host;port=$port;dbname=$database", $username, $password);
         }
     }
 
