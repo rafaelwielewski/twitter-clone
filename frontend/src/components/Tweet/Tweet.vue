@@ -1,21 +1,23 @@
 <template>
   <div id="Tweet">
     <div class="flex flex-col-reverse">
-      <div class="w-full p-4 border-b-1 border-lighter dark:border-dark hover:bg-lighter dark:hover:bg-darkest flex hover:cursor-pointer"
-      @click="router.push(`/${sendTweet.deslogin}/status/${sendTweet.idtweet}`)"
-      >
+      <div
+        class="w-full p-4 border-b-1 border-lighter dark:border-dark hover:bg-lighter dark:hover:bg-darkest flex hover:cursor-pointer"
+        @click="router.push(`/${sendTweet.deslogin}/status/${sendTweet.idtweet}`)">
         <div @click.stop="router.push(sendTweet.deslogin)" class="flex-none mr-4 ">
           <img :src="`/${sendTweet.profileImg}`" class="h-12 w-12 rounded-full flex-none hover:border-1.
-          " />
+            " />
         </div>
-        
+
         <div class="w-full">
           <div class="flex items-center w-full cursor-pointer">
-            <p class="text-base dark:text-lightest font-semibold hover:underline" @click.stop="router.push(sendTweet.deslogin)"> {{ sendTweet.desname }}
+            <p class="text-base dark:text-lightest font-semibold hover:underline"
+              @click.stop="router.push(sendTweet.deslogin)"> {{ sendTweet.desname }}
             </p>
-            <p class="text-base dark:text-gray ml-2 hover:underline" @click.stop="router.push(sendTweet.deslogin)"> @{{ sendTweet.deslogin
+            <p class="text-base dark:text-gray ml-2 hover:underline" @click.stop="router.push(sendTweet.deslogin)"> @{{
+              sendTweet.deslogin
             }} </p>
-            <p class="text-base dark:text-gray ml-2">·</p> 
+            <p class="text-base dark:text-gray ml-2">·</p>
             <p class="text-sm ml-2 dark:text-gray hover:underline"> {{ parseTwitterDate() }}</p>
             <button @click.stop=""
               class="ml-auto py-1 px-2 dark:text-gray hover:text-blue hover:cursor-pointer hover:bg-blue dark:hover:text-blue hover:bg-opacity-20 rounded-full">
@@ -23,21 +25,27 @@
             </button>
           </div>
           <p class="py-2 text-base dark:text-lightest" v-html="`${tweetContent}`"></p>
-          <img v-if="sendTweet.fileurl" :src="`/${sendTweet.fileurl}`" class="object-cover w-full h-auto rounded-lg mb-2 border-1 dark:border-dark" />
+          <img v-if="sendTweet.fileurl" :src="`/${sendTweet.fileurl}`"
+            class="object-cover w-full h-auto rounded-lg mb-2 border-1 dark:border-dark" />
           <div class="flex items-center justify-between w-full ">
-            <div @click.stop="router.push(`/${sendTweet.deslogin}/status/${sendTweet.idtweet}`)" class="flex items-center text-sm py-1 px-2.5 dark:text-gray hover:text-blue dark:hover:text-blue hover:cursor-pointer hover:bg-blue hover:bg-opacity-20 rounded-full">
+            <div @click.stop="router.push(`/${sendTweet.deslogin}/status/${sendTweet.idtweet}`)"
+              class="flex items-center text-sm py-1 px-2.5 dark:text-gray hover:text-blue dark:hover:text-blue hover:cursor-pointer hover:bg-blue hover:bg-opacity-20 rounded-full">
               <button class="far fa-comment mr-3"></button>
               <p> {{ sendTweet.desreplies }} </p>
             </div>
-            <div @click.stop="" class="flex items-center text-sm py-1 px-2.5 dark:text-gray hover:text-green dark:hover:text-green hover:cursor-pointer hover:bg-green hover:bg-opacity-20 rounded-full">
+            <div @click.stop=""
+              class="flex items-center text-sm py-1 px-2.5 dark:text-gray hover:text-green dark:hover:text-green hover:cursor-pointer hover:bg-green hover:bg-opacity-20 rounded-full">
               <button class="fas fa-retweet mr-3"></button>
               <p> {{ sendTweet.desretweets }} </p>
             </div>
-            <button @click.stop="" class="flex items-center text-sm py-1 px-2.5 dark:text-gray hover:text-danger dark:hover:text-danger hover:cursor-pointer hover:bg-danger hover:bg-opacity-20 rounded-full">
-                <ToggleFavorite @click.stop="likeTweet(sendTweet.idtweet)" :sendIdtweet=sendTweet.idtweet :sendUserid=userid></ToggleFavorite>
+            <button @click.stop=""
+              class="flex items-center text-sm py-1 px-2.5 dark:text-gray hover:text-danger dark:hover:text-danger hover:cursor-pointer hover:bg-danger hover:bg-opacity-20 rounded-full">
+              <ToggleFavorite @click.stop="likeTweet(sendTweet.idtweet)" :sendIdtweet=sendTweet.idtweet
+                :sendUserid=userid></ToggleFavorite>
               <p class="likecount2">{{ sendTweet.deslikes }}</p>
             </button>
-            <div class="flex items-center text-sm py-1 px-1 dark:text-gray hover:text-blue hover:cursor-pointer hover:bg-blue hover:bg-opacity-20 rounded-full">
+            <div
+              class="flex items-center text-sm py-1 px-1 dark:text-gray hover:text-blue hover:cursor-pointer hover:bg-blue hover:bg-opacity-20 rounded-full">
               <button class="fas fa-share-square mr-3"></button>
             </div>
           </div>
@@ -50,10 +58,10 @@
 
 <script setup>
 
-import IconEllipsisH from '@/icons/IconEllipsisH.vue'
-import ToggleFavorite from "@/components/like/ToggleFavorite.vue";
+import IconEllipsisH from '../../icons/IconEllipsisH.vue'
+import ToggleFavorite from "../../components/like/ToggleFavorite.vue";
 import { useRouter } from "vue-router";
-import http from '@/services/http';
+import http from '../../services/http';
 import { linkifyHTMLText } from '../../utils/linkify'
 
 
@@ -114,7 +122,7 @@ export default {
       console.log('começo');
 
       let tdate = this.sendTweet.dtregister
-      var longdate = new Date(tdate).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"}) 
+      var longdate = new Date(tdate).toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" })
       var systemDate = new Date(Date.parse(tdate));
       var userDate = new Date();
       var diff = Math.floor((userDate - systemDate) / 1000);
@@ -129,15 +137,13 @@ export default {
       if (diff <= 129600) { return '1 day ago'; }
       if (diff < 604800) { return Math.round(diff / 86400) + ' days ago'; }
       if (diff <= 777600) { return '1 week ago'; }
-      return  longdate;
-      
-      
+      return longdate;
+
+
     },
   }
 }
 
 </script>
 
-<style>
-
-</style>
+<style></style>

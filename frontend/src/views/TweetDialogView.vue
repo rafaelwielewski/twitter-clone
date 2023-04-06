@@ -1,7 +1,8 @@
 <template :key="$route.fullPath">
   <main>
     <div id="TweetDialog" class="flex md:container h-screen w-full overflow-y-scroll">
-      <div class="xl:w-1/5 border-r border-lighter dark:border-dark px-0 lg:px-6 py-2 flex flex-col justify-between h-screen sticky top-0 overflow-y-auto no-scrollbar">
+      <div
+        class="xl:w-1/5 border-r border-lighter dark:border-dark px-0 lg:px-6 py-2 flex flex-col justify-between h-screen sticky top-0 overflow-y-auto no-scrollbar">
         <Sidebar />
       </div>
       <div class="w-full xl:w-1/2 h-full">
@@ -9,14 +10,15 @@
           <NavBar />
         </nav>
         <div>
-        <Tweet :sendTweet = tweet />
-      </div>
-        <CreateReply :sendTweet =tweet @refresh="refresh"/>
+          <Tweet :sendTweet=tweet />
+        </div>
+        <CreateReply :sendTweet=tweet @refresh="refresh" />
         <div v-for="(sendReply, index) in reply" :key="index">
-          <Reply :key="cacheKey" :sendReply = sendReply />
+          <Reply :key="cacheKey" :sendReply=sendReply />
         </div>
       </div>
-      <div class="lg:block hidden w-1/3 h-full border-l border-lighter dark:border-dark py-2 px-6 relative h-screen sticky top-0 overflow-y-auto no-scrollbar">
+      <div
+        class="lg:block hidden w-1/3 h-full border-l border-lighter dark:border-dark py-2 px-6 relative h-screen sticky top-0 overflow-y-auto no-scrollbar">
         <Trending />
       </div>
     </div>
@@ -25,14 +27,14 @@
 
 <script setup>
 
-import Sidebar from '@/components/Sidebar.vue';
-import Trending from '@/components/trending.vue';
-import NavBar from '@/components/NavBar.vue';
-import Tweet from '@/components/Tweet/Tweet.vue';
-import Reply from '@/components/Tweet/Reply.vue';
-import CreateReply from '@/components/Tweet/CreateReply2.vue';
+import Sidebar from '../components/Sidebar.vue';
+import Trending from '../components/trending.vue';
+import NavBar from '../components/NavBar.vue';
+import Tweet from '../components/Tweet/Tweet.vue';
+import Reply from '../components/Tweet/Reply.vue';
+import CreateReply from '../components/Tweet/CreateReply2.vue';
 import { useRouter } from "vue-router";
-import http from '@/services/http';
+
 
 const router = useRouter();
 
@@ -112,6 +114,4 @@ export default {
 
 </script>
 
-<style>
-
-</style>
+<style></style>

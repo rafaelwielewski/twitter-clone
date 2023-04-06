@@ -6,16 +6,12 @@
       </div>
       <form v-on:submit.prevent="addTweet" class="w-full px-4 relative">
         <textarea @input="resize($event)" v-model="tweet.text" placeholder="What's Happening?" class="
-        text-xl mt-3 pb-3 w-full breakwords border-none resize-none	
-        focus:ring-0
-        dark:text-lightest dark:bg-black
-        ">
-      </textarea>
-        <img
-            v-if="tweetImgPreview"
-            :src="tweetImgPreview"
-            class="object-cover w-full h-96 rounded-lg"
-          />
+          text-xl mt-3 pb-3 w-full breakwords border-none resize-none	
+          focus:ring-0
+          dark:text-lightest dark:bg-black
+          ">
+        </textarea>
+        <img v-if="tweetImgPreview" :src="tweetImgPreview" class="object-cover w-full h-96 rounded-lg" />
         <div class="flex items-center pb-4">
           <button @click.prevent="tweetAttachmentInput.click" type="button" class="text-lg text-blue mr-4 far fa-image">
           </button>
@@ -24,9 +20,9 @@
           <button type="button" class="text-lg text-blue mr-4 far fa-chart-bar"></button>
           <button type="button" class="text-lg text-blue mr-4 far fa-smile"></button>
           <button type="submit"
-          class="h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full absolute right-0">
-          Tweet
-        </button>
+            class="h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full absolute right-0">
+            Tweet
+          </button>
         </div>
       </form>
     </div>
@@ -35,7 +31,6 @@
   
 <script setup>
 
-import ResizeTextArea from '@/utils/resizetextarea.vue'
 import http from '../../services/http'
 import { defineComponent, ref, computed } from 'vue'
 
@@ -70,7 +65,7 @@ export default {
 
   methods: {
 
-    resize (e) {
+    resize(e) {
 
       e.target.style.height = 'auto'
       e.target.style.height = `${e.target.scrollHeight}px`
@@ -96,17 +91,17 @@ export default {
         formData.append('file', this.tweet.file);
         formData.append('text', this.tweet.text);
         formData.append('iduser', this.iduser);
-        formData.append('name',this.name);
+        formData.append('name', this.name);
         formData.append('username', this.username);
 
-        const { data } = await http.post("/post-tweet", 
-        formData,
-        {
+        const { data } = await http.post("/post-tweet",
+          formData,
+          {
 
-        });
+          });
         this.tweet.text = '';
-        this.tweetImgPreview =  '',
-        this.$emit("refresh")
+        this.tweetImgPreview = '',
+          this.$emit("refresh")
 
 
       } catch (error) {
@@ -121,13 +116,11 @@ export default {
 </script>
 
 <style>
-
 .likecount {
   display: flex;
 }
+
 .likecount2 {
   margin-left: 10px;
 }
-
-
 </style>

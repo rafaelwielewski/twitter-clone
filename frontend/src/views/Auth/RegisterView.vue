@@ -7,62 +7,61 @@
             </h1>
             <form @submit.prevent="register()" class="w-full text-center">
                 <input v-model="inputRegister.name" type="text" placeholder="Name" class="
-            w-full
-            px-2
-            py-2
-            my-6
-            border-2 border-lighter
-            text-xl
-            rounded
-            dark:border-dark
-            focus:outline-none
-            dark:bg-black
-            dark:text-light
-            focus:border-blue
-            dark:focus:border-blue
-            transition-colors
-            duration-75
-          " />
-          <input v-model="inputRegister.username" type="text" placeholder="Username" class="
-            w-full
-            px-2
-            py-2
-            mb-6
-            border-2 border-lighter
-            text-xl
-            rounded
-            dark:border-dark
-            focus:outline-none
-            dark:bg-black
-            dark:text-light
-            focus:border-blue
-            dark:focus:border-blue
-            transition-colors
-            duration-75
-          " />
+                        w-full
+                        px-2
+                        py-2
+                        my-6
+                        border-2 border-lighter
+                        text-xl
+                        rounded
+                        dark:border-dark
+                        focus:outline-none
+                        dark:bg-black
+                        dark:text-light
+                        focus:border-blue
+                        dark:focus:border-blue
+                        transition-colors
+                        duration-75
+                      " />
+                <input v-model="inputRegister.username" type="text" placeholder="Username" class="
+                        w-full
+                        px-2
+                        py-2
+                        mb-6
+                        border-2 border-lighter
+                        text-xl
+                        rounded
+                        dark:border-dark
+                        focus:outline-none
+                        dark:bg-black
+                        dark:text-light
+                        focus:border-blue
+                        dark:focus:border-blue
+                        transition-colors
+                        duration-75
+                      " />
                 <input v-model="inputRegister.password" type="password" placeholder="Password" class="
-            w-full
-            px-2
-            py-2
-            mb-6
-            border-2 border-lighter
-            text-xl
-            rounded
-            dark:border-dark
-            focus:outline-none
-            dark:bg-black
-            dark:text-light
-            focus:border-blue
-            dark:focus:border-blue
-            transition-colors
-            duration-75
-          " />
-                <button type="submit" class="bg-black hover:opacity-75 rounded-full focus:outline-none w-full h-12"
-                    :class="
-                        inputEmpty
-                            ? 'cursor-not-allowed'
-                            : 'cursor-pointer'
-                    " :disabled="inputEmpty">
+                        w-full
+                        px-2
+                        py-2
+                        mb-6
+                        border-2 border-lighter
+                        text-xl
+                        rounded
+                        dark:border-dark
+                        focus:outline-none
+                        dark:bg-black
+                        dark:text-light
+                        focus:border-blue
+                        dark:focus:border-blue
+                        transition-colors
+                        duration-75
+                      " />
+                <button type="submit" class="bg-black hover:opacity-75 rounded-full focus:outline-none w-full h-12" :class="
+                    inputEmpty
+                        ? 'cursor-not-allowed'
+                        : 'cursor-pointer'
+                " :disabled="inputEmpty">
                     <LoadingSpinner v-if="loading" color="white" size="36px" />
                     <span v-else class="text-lightest text-lg font-semibold">Sign up</span>
                 </button>
@@ -78,7 +77,7 @@
   
 <script>
 
-import http from '@/services/http';
+import http from '../../services/http';
 import { useRoute, useRouter } from 'vue-router'
 import { computed, defineComponent, reactive, ref } from 'vue'
 import IconTwitter from '../../icons/IconTwitter.vue'
@@ -199,8 +198,6 @@ export default defineComponent({
 </script>
   
   
-<style>
-
-</style>
+<style></style>
   
   

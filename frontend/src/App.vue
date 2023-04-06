@@ -10,7 +10,6 @@
 
 <script setup>
 
-import BaseLayout from '@/layout/BaseLayout.vue'
 import { mapGetters } from 'vuex';
 import { RouterView } from 'vue-router'
 

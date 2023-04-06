@@ -1,17 +1,20 @@
 <template>
   <div id="sidebar">
     <div>
-      <button class="h-12 w-12 dark:hover:text-lightest dark:hover:bg-dark hover:bg-lightblue text-3xl rounded-full text-blue dark:text-lightest" @click="router.push(`/`)">
+      <button
+        class="h-12 w-12 dark:hover:text-lightest dark:hover:bg-dark hover:bg-lightblue text-3xl rounded-full text-blue dark:text-lightest"
+        @click="router.push(`/`)">
         <i class="fab fa-twitter"></i>
       </button>
       <DarkModeToggle />
       <div class="">
         <button v-for="(tab, index) in tabs" :key="index" @click="id = tab.id"
-            :class="`
-            dark:hover:text-lightest dark:hover:bg-dark
-            text-left focus:outline-none hover:text-blue flex items-center sm:py-2 xl:py-3 px-2 hover:bg-lightblue rounded-full mr-auto mb-1 ${id === tab.id ? 'text-blue' : ''}`">
-            <router-link :to="`/${tab.link}`" class="flex dark:hover:text-lightest dark:hover:bg-dark">
-            <component :is="tab.icon" :size="26" class="fill-lightest dark:text-lightest text-2xl mr-4 text-left" ></component>
+          :class="`
+                                    dark:hover:text-lightest dark:hover:bg-dark
+                                    text-left focus:outline-none hover:text-blue flex items-center sm:py-2 xl:py-3 px-2 hover:bg-lightblue rounded-full mr-auto mb-1 ${id === tab.id ? 'text-blue' : ''}`">
+          <router-link :to="`/${tab.link}`" class="flex dark:hover:text-lightest dark:hover:bg-dark">
+            <component :is="tab.icon" :size="26" class="fill-lightest dark:text-lightest text-2xl mr-4 text-left">
+            </component>
             <p class="dark:text-lightest text-lg font-semibold text-left hidden xl:block"> {{ tab.title }} </p>
           </router-link>
         </button>
@@ -35,7 +38,8 @@
     </button>
     <div v-if="dropdown === true"
       class="absolute bottom-0 left-0 w-64 rounded-3xl shadow-md dark:shadow-gray border-lightest bg-lightest dark:bg-black mb-16">
-      <button @click="dropdown = false" class="p-3 flex items-center w-full hover:bg-lightest dark:hover:bg-dark p-2 focus:outline-none">
+      <button @click="dropdown = false"
+        class="p-3 flex items-center w-full hover:bg-lightest dark:hover:bg-dark p-2 focus:outline-none">
         <img :src="`/${profileImg}`" class="w-10 h-10 rounded-full" />
         <div class="ml-4">
           <p class="dark:text-lightest text-sm font-bold leading-tight"> {{ name }} </p>
@@ -57,19 +61,15 @@
 
 <script setup>
 import DarkModeToggle from './DarkModeToggle.vue';
-import IconTwitter from '@/icons/IconTwitter.vue'
-import IconPlus from '@/icons/IconPlus.vue'
-import IconChevronDown from '@/icons/IconChevronDown.vue'
-import IconCheck from '@/icons/IconCheck.vue'
-import IconHome from '@/icons/IconHome.vue'
-import IconHashtag from '@/icons/IconHashtag.vue'
-import IconBell from '@/icons/IconBell.vue'
-import IconEnvelope from '@/icons/IconEnvelope.vue'
-import IconBookmark from '@/icons/IconBookmark.vue'
-import IconList from '@/icons/IconList.vue'
-import IconUser from '@/icons/IconUser.vue'
-import IconMore from '@/icons/IconMore.vue'
-import IconEllipsisH from '@/icons/IconEllipsisH.vue'
+import IconHome from '../icons/IconHome.vue'
+import IconHashtag from '../icons/IconHashtag.vue'
+import IconBell from '../icons/IconBell.vue'
+import IconEnvelope from '../icons/IconEnvelope.vue'
+import IconBookmark from '../icons/IconBookmark.vue'
+import IconList from '../icons/IconList.vue'
+import IconUser from '../icons/IconUser.vue'
+import IconMore from '../icons/IconMore.vue'
+import IconEllipsisH from '../icons/IconEllipsisH.vue'
 import { useRouter } from "vue-router";
 const router = useRouter();
 
@@ -120,6 +120,4 @@ export default {
 
 </script>
 
-<style>
-
-</style>
+<style></style>

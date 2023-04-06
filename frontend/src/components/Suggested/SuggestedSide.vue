@@ -1,56 +1,57 @@
 <template>
-    <button class="w-full flex text-left hover:bg-lighter p-3 border-t border-lighter" @click="router.push(sendProfiles.deslogin)">
-      <img :src="sendProfiles.profileImg" class="w-14 h-14 rounded-full border border-lighter" />
-      <div class="hidden lg:block ml-4">
-        <p class="text-base font-bold leading-tight"> {{ sendProfiles.desname }} </p>
-        <p class="text-base leading-tight"> @{{ sendProfiles.deslogin }} </p>
-        <p class="text-base leading-tight py-1"> {{ sendProfiles.bio }} </p>
-      </div>
-      <button v-show="!isFollowing" @click.stop="follow" class="
-          ml-auto
-          float-right
-          text-blue
-          text-sm
-          font-bold
-          py-1
-          px-4
-          rounded-full
-          border-2 border-blue
-          hover:bg-blue hover:bg-opacity-25
-          focus:outline-none
-          transition-colors
-          duration-75
-        ">
-        Follow
-      </button>
-      <button v-show="isFollowing" @click.stop="unfollow" class="
-          group
-          ml-auto
-          float-right
-          text-lightest
-          text-sm
-          font-bold
-          py-1
-          px-4
-          rounded-full
-          border-2 border-blue
-          bg-blue
-          hover:bg-danger
-          hover:border-danger
-          focus:outline-none
-          transition-colors
-          duration-75
-        ">
-        <span class="group-hover:hidden">Following</span>
-        <span class="hidden group-hover:block">Unfollow</span>
-      </button>
+  <button class="w-full flex text-left hover:bg-lighter p-3 border-t border-lighter"
+    @click="router.push(sendProfiles.deslogin)">
+    <img :src="sendProfiles.profileImg" class="w-14 h-14 rounded-full border border-lighter" />
+    <div class="hidden lg:block ml-4">
+      <p class="text-base font-bold leading-tight"> {{ sendProfiles.desname }} </p>
+      <p class="text-base leading-tight"> @{{ sendProfiles.deslogin }} </p>
+      <p class="text-base leading-tight py-1"> {{ sendProfiles.bio }} </p>
+    </div>
+    <button v-show="!isFollowing" @click.stop="follow" class="
+            ml-auto
+            float-right
+            text-blue
+            text-sm
+            font-bold
+            py-1
+            px-4
+            rounded-full
+            border-2 border-blue
+            hover:bg-blue hover:bg-opacity-25
+            focus:outline-none
+            transition-colors
+            duration-75
+          ">
+      Follow
     </button>
+    <button v-show="isFollowing" @click.stop="unfollow" class="
+            group
+            ml-auto
+            float-right
+            text-lightest
+            text-sm
+            font-bold
+            py-1
+            px-4
+            rounded-full
+            border-2 border-blue
+            bg-blue
+            hover:bg-danger
+            hover:border-danger
+            focus:outline-none
+            transition-colors
+            duration-75
+          ">
+      <span class="group-hover:hidden">Following</span>
+      <span class="hidden group-hover:block">Unfollow</span>
+    </button>
+  </button>
 </template>
 
 
 <script setup>
 
-import http from '@/services/http';
+import http from '../../services/http';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -156,6 +157,4 @@ export default {
 
 </script>
 
-<style>
-
-</style>
+<style></style>

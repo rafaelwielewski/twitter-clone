@@ -1,5 +1,4 @@
 <template>
-
   <button class="toggle-favorite " @click="toggle">
     <FavoriteIcon class="toggle-favorite__icon" :class="iconClasses" @animationend.native="onIconAnimationEnds" />
     <transition name="favorite-particles-transition">
@@ -10,8 +9,8 @@
   
 <script>
 
-import FavoriteIcon from "@/components/like/FavoriteIcon.vue";
-import http from '@/services/http';
+import FavoriteIcon from "../../components/like/FavoriteIcon.vue";
+import http from '../../services/http';
 
 export default {
   name: "ToggleFavoriteReply",
@@ -19,8 +18,8 @@ export default {
     FavoriteIcon
   },
   props: {
-      sendIdReply: Number,
-      sendUserid: String,
+    sendIdReply: Number,
+    sendUserid: String,
   },
 
   data() {

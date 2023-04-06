@@ -26,11 +26,11 @@
 
 <script setup>
 
-import Suggested from '@/components/Suggested/Suggested.vue';
-import Sidebar from '@/components/Sidebar.vue';
-import Trending from '@/components/trending.vue';
-import NavBar from '@/components/NavBar.vue';
-import http from '@/services/http';
+import Suggested from '../components/Suggested/Suggested.vue';
+import Sidebar from '../components/Sidebar.vue';
+import Trending from '../components/trending.vue';
+import NavBar from '../components/NavBar.vue';
+import http from '../services/http';
 
 
 </script>

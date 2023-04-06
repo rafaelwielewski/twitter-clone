@@ -46,7 +46,7 @@
               <button class="fas fa-retweet mr-3"></button>
               <p> {{ tweet.desretweets }} </p>
             </div>
-            
+
             <div class="flex items-center text-sm text-dark">
               <ToggleFavorite class="fas mr-3" @click="likeTweet(tweet.idtweet, index)"></ToggleFavorite>
               <p> {{ tweet.deslikes }} </p>
@@ -67,7 +67,7 @@
   
 <script>
 
-import ToggleFavorite from "@/components/like/ToggleFavorite.vue";
+import ToggleFavorite from "../components/like/ToggleFavorite.vue";
 
 
 export default {
@@ -216,7 +216,6 @@ import http from '@/services/http';
 </script>
 
 <style lang="scss">
-
 button {
   background: none;
   border: none;

@@ -11,9 +11,9 @@
 
 <script setup>
 
-import Sidebar from '@/components/Sidebar.vue';
+import Sidebar from '../components/Sidebar.vue';
 import { RouterView } from 'vue-router'
-import Trending from '@/components/trending.vue';
+import Trending from '../components/trending.vue';
 
 </script>
 

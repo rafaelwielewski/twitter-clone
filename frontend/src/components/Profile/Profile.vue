@@ -1,123 +1,117 @@
 <template>
-
-<EditProfile
-    :profileEdit="profile"
-    :profileImg="profile.profileImg"
-    :show="showEditProfile"
-    @close="close()"
-    @dispatch="updateProfile"
-  />
+  <EditProfile :profileEdit="profile" :profileImg="profile.profileImg" :show="showEditProfile" @close="close()"
+    @dispatch="updateProfile" />
   <main :key="cacheKey" class="
-      w-full
-      h-full
-      border-r border-lighter
-      dark:border-darker
-      md:border-r-0
-    " ref="scrollRef">
+        w-full
+        h-full
+        border-r border-lighter
+        dark:border-darker
+        md:border-r-0
+      " ref="scrollRef">
     <div class="
-        sticky top-0 z-10
-        dark:bg-black
-        bg-whitest
-        px-5
-        py-3
-        border-b border-lighter
-        dark:border-dark
-        flex
-        items-center
-        justify-start
-        space-x-6
-      ">
+          sticky top-0 z-10
+          dark:bg-black
+          bg-whitest
+          px-5
+          py-3
+          border-b border-lighter
+          dark:border-dark
+          flex
+          items-center
+          justify-start
+          space-x-6
+        ">
       <Return />
       <h1 class="text-xl font-bold dark:text-lightest"> {{ profile.desname }}</h1>
     </div>
     <div class="
-        px-6
-        h-48
-        border-b border-lighter
-        dark:border-dark
-        bg-blue
-        relative
-      ">
-      <div class="
-          absolute
-          overflow-hidden
-          mt-32
-          rounded-full
-          w-28
-          h-28
-          md:w-32
-          md:h-32
-          border-4 border-lightest
-          dark:border-black
-          bg-black
+          px-6
+          h-48
+          border-b border-lighter
+          dark:border-dark
+          bg-blue
+          relative
         ">
+      <div class="
+            absolute
+            overflow-hidden
+            mt-32
+            rounded-full
+            w-28
+            h-28
+            md:w-32
+            md:h-32
+            border-4 border-lightest
+            dark:border-black
+            bg-black
+          ">
         <img :src="`${profile.profileImg}?cache=${cacheKey}`" class="w-28 h-28 md:w-32 md:h-32" />
       </div>
     </div>
     <div class="mt-5 px-6">
       <button v-show="isCurrentUser" @click="showEditProfile = true" class="
-          float-right
-          text-blue
-          font-bold
-          py-2
-          px-5
-          rounded-full
-          border-2 border-blue
-          hover:bg-blue hover:bg-opacity-25
-          focus:outline-none
-          transition-colors
-          duration-75
-        ">
+            float-right
+            text-blue
+            font-bold
+            py-2
+            px-5
+            rounded-full
+            border-2 border-blue
+            hover:bg-blue hover:bg-opacity-25
+            focus:outline-none
+            transition-colors
+            duration-75
+          ">
         Edit Profile
       </button>
       <button v-show="!isCurrentUser && !isFollowing" @click="follow" class="
-          float-right
-          text-blue
-          font-bold
-          py-2
-          px-6
-          rounded-full
-          border-2 border-blue
-          hover:bg-blue hover:bg-opacity-25
-          focus:outline-none
-          transition-colors
-          duration-75
-        ">
+            float-right
+            text-blue
+            font-bold
+            py-2
+            px-6
+            rounded-full
+            border-2 border-blue
+            hover:bg-blue hover:bg-opacity-25
+            focus:outline-none
+            transition-colors
+            duration-75
+          ">
         Follow
       </button>
       <button v-show="!isCurrentUser && isFollowing" @click="unfollow" class="
-          group
-          float-right
-          text-lightest
-          font-bold
-          py-2
-          px-6
-          rounded-full
-          border-2 border-blue
-          bg-blue
-          hover:bg-danger
-          hover:border-danger
-          focus:outline-none
-          transition-colors
-          duration-75
-        ">
+            group
+            float-right
+            text-lightest
+            font-bold
+            py-2
+            px-6
+            rounded-full
+            border-2 border-blue
+            bg-blue
+            hover:bg-danger
+            hover:border-danger
+            focus:outline-none
+            transition-colors
+            duration-75
+          ">
         <span class="group-hover:hidden">Following</span>
         <span class="hidden group-hover:block">Unfollow</span>
       </button>
       <button v-show="!isCurrentUser" class="
-          float-right
-          text-blue
-          font-bold
-          py-2
-          px-3
-          mr-4
-          rounded-full
-          border-2 border-blue
-          hover:bg-blue hover:bg-opacity-25
-          focus:outline-none
-          transition-colors
-          duration-75
-        ">
+            float-right
+            text-blue
+            font-bold
+            py-2
+            px-3
+            mr-4
+            rounded-full
+            border-2 border-blue
+            hover:bg-blue hover:bg-opacity-25
+            focus:outline-none
+            transition-colors
+            duration-75
+          ">
 
         <IconEllipsisH />
       </button>
@@ -132,12 +126,12 @@
           {{ profile.bio }}
         </p>
         <div class="
-            w-full
-            flex flex-wrap flex-col
-            md:flex-row
-            md:space-x-4
-            text-sm
-          ">
+              w-full
+              flex flex-wrap flex-col
+              md:flex-row
+              md:space-x-4
+              text-sm
+            ">
           <div v-show="profile.location !== ''" class="flex items-center space-x-1 dark:text-gray">
             <IconMapMarker />
             <p>{{ profile.location }}</p>
@@ -158,12 +152,12 @@
           </div>
         </div>
         <div class="
-            w-full
-            flex flex-wrap flex-col
-            md:flex-row
-            md:space-x-4
-            text-sm
-          ">
+              w-full
+              flex flex-wrap flex-col
+              md:flex-row
+              md:space-x-4
+              text-sm
+            ">
           <div class="flex items-center space-x-2">
             <p class="font-bold dark:text-lightest">
               {{ profile.follows }}
@@ -180,61 +174,61 @@
       </div>
     </div>
     <div class="
-        w-full
-        flex
-        justify-between
-        items-center
-        mt-4
-        border-b border-lighter
-        dark:border-dark
-      ">
-      <div class="
           w-full
-          py-4
-          dark:text-lightest
-          text-center
-          hover:bg-blue hover:bg-opacity-10
-          hover:text-blue
-          cursor-pointer
-          transition-colors
-          duration-75
-        " :class="selectedTab === 1 ? tabClasses : selectedTabClasses" @click="selectedTab = 1">
+          flex
+          justify-between
+          items-center
+          mt-4
+          border-b border-lighter
+          dark:border-dark
+        ">
+      <div class="
+            w-full
+            py-4
+            dark:text-lightest
+            text-center
+            hover:bg-blue hover:bg-opacity-10
+            hover:text-blue
+            cursor-pointer
+            transition-colors
+            duration-75
+          " :class="selectedTab === 1 ? tabClasses : selectedTabClasses" @click="selectedTab = 1">
         <h1 class="font-bold">Tweets</h1>
       </div>
       <div class="
-          w-full
-          py-4
-          text-center
-          hover:bg-blue hover:bg-opacity-10
-          hover:text-blue
-          cursor-pointer
-          transition-colors
-          duration-75
-        " :class="selectedTab === 2 ? tabClasses : selectedTabClasses" @click="selectedTab = 2">
+            w-full
+            py-4
+            text-center
+            hover:bg-blue hover:bg-opacity-10
+            hover:text-blue
+            cursor-pointer
+            transition-colors
+            duration-75
+          " :class="selectedTab === 2 ? tabClasses : selectedTabClasses" @click="selectedTab = 2">
         <h1 class="font-bold">Tweets & Replies</h1>
       </div>
       <div class="
-          w-full
-          py-4
-          text-center
-          hover:bg-blue hover:bg-opacity-10
-          hover:text-blue
-          cursor-pointer
-          transition-colors
-          duration-75
-        " :class="selectedTab === 3 ? tabClasses : selectedTabClasses" @click="selectedTab = 3">
+            w-full
+            py-4
+            text-center
+            hover:bg-blue hover:bg-opacity-10
+            hover:text-blue
+            cursor-pointer
+            transition-colors
+            duration-75
+          " :class="selectedTab === 3 ? tabClasses : selectedTabClasses" @click="selectedTab = 3">
         <h1 class="font-bold">Media</h1>
       </div>
       <div class="
-          w-full
-          py-4
-          text-center
-          hover:bg-blue hover:bg-opacity-10
-          hover:text-blue
-          cursor-pointer
-          transition-colors
-          duration-75
-        " :class="selectedTab === 4 ? tabClasses : selectedTabClasses" @click="selectedTab = 4">
+            w-full
+            py-4
+            text-center
+            hover:bg-blue hover:bg-opacity-10
+            hover:text-blue
+            cursor-pointer
+            transition-colors
+            duration-75
+          " :class="selectedTab === 4 ? tabClasses : selectedTabClasses" @click="selectedTab = 4">
         <h1 class="font-bold">Likes</h1>
       </div>
     </div>
@@ -243,36 +237,35 @@
         <Tweet :sendTweet=sendTweet />
       </div>
       <div class="
-          w-full
-          p-4
-          border-b border-lighter
-          dark:border-dark
-          hover:bg-lighter
-          dark:hover:bg-darker
-          flex
-          cursor-pointer
-        ">
+            w-full
+            p-4
+            border-b border-lighter
+            dark:border-dark
+            hover:bg-lighter
+            dark:hover:bg-darker
+            flex
+            cursor-pointer
+          ">
         <div class="w-full text-center">
           <LoadingSpinner />
         </div>
       </div>
     </div>
   </main>
-
 </template>
 
 
 <script setup>
 
-import http from '@/services/http';
+import http from '../../services/http';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import IconEllipsisH from '../../icons/IconEllipsisH.vue'
 import LoadingSpinner from '../../shared/LoadingSpinner.vue'
 import Return from '../../shared/Return.vue'
-import NavBar from '@/components/NavBar.vue';
-import Tweet from '@/components/Tweet/Tweet.vue';
-import EditProfile from '@/components/Profile/EditProfile.vue';
+import NavBar from '../../components/NavBar.vue';
+import Tweet from '../../components/Tweet/Tweet.vue';
+import EditProfile from '../../components/Profile/EditProfile.vue';
 
 const router = useRouter();
 
@@ -295,7 +288,7 @@ export default {
       showEditProfile: false,
       username: this.$route.params.id,
       profile: '',
-      tweets:'',
+      tweets: '',
       isCurrentUser: false,
       isFollowing: false,
     }
@@ -315,8 +308,8 @@ export default {
       const nowTime = +new Date()
       this.cacheKey = nowTime
     },
-    
-    close(){
+
+    close() {
 
       this.showEditProfile = false;
       this.forceRerender();
@@ -427,6 +420,4 @@ export default {
 
 </script>
 
-<style>
-
-</style>
+<style></style>
